@@ -1,26 +1,29 @@
 #pragma once
-class Mapa
+class Mapa : public Ecra
 {
+
 public:
-	Mapa();
-	static void DrawMap(int lenght = 10, int height = 10) {
-		for (int i = 0; i < lenght + 2; i++)
-			printf("X ");
-		printf("\n");
+	static void DrawMap(int limite = limiteMapa) {
+		for (int i = 0; i < limite + 2; i++)
+			cout << "X ";
+		cout << "\n";
 
-		for (int l = 0; l < lenght; l++)
+		for (int l = 0; l < limite; l++)
 		{
-			printf("X ");
-			for (int h = 0; h < height; h++)
+			cout << "X ";
+			for (int h = 0; h < limite; h++)
 			{
-
-				printf("  ");
+				if ((rand() % 100 + 1) <= 90)
+					cout << "  ";
+				else
+					cout << "O ";
 			}
-			printf("X\n");
+			cout << "X\n";
 		}
 
-		for (int i = 0; i < lenght + 2; i++)
-			printf("X ");
+		for (int i = 0; i < limite + 2; i++)
+			cout << "X ";
 	}
+	Mapa();
 };
 

@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ecra.h" />
     <ClInclude Include="Elemento.h" />
     <ClInclude Include="Formiga.h" />
     <ClInclude Include="Mapa.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ecra.cpp" />
     <ClCompile Include="Elemento.cpp" />
     <ClCompile Include="Formiga.cpp" />
     <ClCompile Include="Main.cpp" />
