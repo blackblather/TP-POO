@@ -4,6 +4,7 @@ class Ecra
 protected:
 	static void gotoxy(int column, int line)
 	{
+		int cona;
 		COORD coord;
 		coord.X = column;
 		coord.Y = line;

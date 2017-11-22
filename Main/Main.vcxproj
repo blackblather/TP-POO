@@ -147,6 +147,7 @@
     <ClInclude Include="Elemento.h" />
     <ClInclude Include="Formiga.h" />
     <ClInclude Include="Mapa.h" />
+    <ClInclude Include="Simulacao.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="Formiga.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mapa.cpp" />
+    <ClCompile Include="Simulacao.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

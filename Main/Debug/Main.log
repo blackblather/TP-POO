@@ -1,8 +1,10 @@
 ﻿  stdafx.cpp
+c:\users\eleut\google drive\licenciatura (2016-xxxx)\2017 - 2018\semestre 1\poo\tp\main\ecra.h(7): warning C4101: 'cona': unreferenced local variable
   Mapa.cpp
   Main.cpp
   Formiga.cpp
   Elemento.cpp
   Ecra.cpp
   Generating Code...
-  Main.vcxproj -> C:\Users\gusta\Source\Repos\TP-POO\Debug\Main.exe
+  Main.vcxproj -> C:\Users\eleut\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.exe
+  Main.vcxproj -> C:\Users\eleut\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.pdb (Partial PDB)
