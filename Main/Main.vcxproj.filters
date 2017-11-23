@@ -36,6 +36,12 @@
     <ClInclude Include="Simulacao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Migalha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ninho.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Simulacao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Migalha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ninho.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

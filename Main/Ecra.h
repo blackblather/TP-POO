@@ -1,13 +1,13 @@
-#pragma once
+#pragma once	//Para poder utilizar estrutura "COORD"
+
 class Ecra
 {
 protected:
-	static void gotoxy(int column, int line)
+	static void gotoxy(posXY pos)
 	{
-		int cona;
 		COORD coord;
-		coord.X = column;
-		coord.Y = line;
+		coord.X = pos.x;
+		coord.Y = pos.y;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 	}
 public:
