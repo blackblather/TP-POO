@@ -17,6 +17,7 @@ class Simulacao
 	Mapa* mapa;
 public:
 	void SetConfigs();
+	void Start();
 	Simulacao();
 	~Simulacao();
 };

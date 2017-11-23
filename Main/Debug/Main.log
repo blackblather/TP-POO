@@ -1,12 +1,6 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Main2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  stdafx.cpp
-  Simulacao.cpp
+﻿  Simulacao.cpp
   Ninho.cpp
   Migalha.cpp
-  Mapa.cpp
-  Main.cpp
-  Formiga.cpp
-  Elemento.cpp
-  Ecra.cpp
   Generating Code...
-  Main.vcxproj -> C:\Users\joaom\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.exe
+  Main.vcxproj -> C:\Users\eleut\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.exe
+  Main.vcxproj -> C:\Users\eleut\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.pdb (Partial PDB)
