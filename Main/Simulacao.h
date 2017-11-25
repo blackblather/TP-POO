@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include "Mapa.h"
 #include "Formiga.h"
 #include "Migalha.h"
@@ -6,17 +7,20 @@
 
 class Simulacao
 {
-	int limiteMapa,
-		energiaInitNinhos,
-		energiaNinhoParaFormiga = 1,
-		energiaNovasMigalhas,
-		qtdMigalhasIniciais,	//(int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100) <-- AUX
-		maxMigalhas;
-	double percentEnergiaNovaFormiga,
-		percentDeMigalhasIniciais;
+	int limiteMapa = -1,					// defmundo <limiteMapa>
+		energiaInitNinhos = -1,				// defen <energiaInitNinhos>
+		energiaNinhoParaFormiga = 1,		// defvt <energiaNinhoParaFormiga>
+		energiaNovasMigalhas = -1,			// defme <energiaNovasMigalhas>
+		qtdMigalhasIniciais = -1,			/*AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)*/
+		maxMigalhasPorIteracao = -1;		// defnm <maxMigalhas>
+	
+	double percentEnergiaNovaFormiga = -1,	// defpc <percentEnergiaNovaFormiga>
+		percentDeMigalhasIniciais = -1;		// defmi <percentDeMigalhasIniciais>
 	Mapa* mapa;
+	void PrintValorProp(string prop);
 public:
-	void SetConfigs();
+	void PrintConfigsIniciais();
+	void ScanConfig();
 	void Start();
 	Simulacao();
 	~Simulacao();

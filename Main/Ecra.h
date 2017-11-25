@@ -2,7 +2,7 @@
 
 class Ecra
 {
-protected:
+public:
 	static void gotoxy(posXY pos)
 	{
 		COORD coord;
@@ -10,7 +10,6 @@ protected:
 		coord.Y = pos.y;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 	}
-public:
 	static void LimpaEcra() {
 		COORD topLeft = { 0, 0 };
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -27,9 +26,43 @@ public:
 		);
 		SetConsoleCursorPosition(console, topLeft);
 	}
-	static void SetCorTexto()
+	static void SetCorTexto(char* cor)
 	{
+		/*
+		 * 0   BLACK
+		 * 1   BLUE
+		 * 2   GREEN
+		 * 3   CYAN
+		 * 4   RED
+		 * 5   MAGENTA
+		 * 6   BROWN
+		 * 7   LIGHTGRAY
+		 * 8   DARKGRAY
+		 * 9   LIGHTBLUE
+		 * 10  LIGHTGREEN
+		 * 11  LIGHTCYAN
+		 * 12  LIGHTRED
+		 * 13  LIGHTMAGENTA
+		 * 14  YELLOW
+		 * 15  WHITE
+		 */
 
+		if (cor == "vermelho")
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0);
+		else if (cor == "verde")
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10 | 0);
+		else if (cor == "azul")
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9 | 0);
+		else if (cor == "default")
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | 0);
+	}
+	static void PrintTextoColorido(string txt, char* corNova, char* corAntiga) {
+		if (txt.length() > 0)
+		{
+			SetCorTexto(corNova);
+			cout << txt;
+			SetCorTexto(corAntiga);
+		}
 	}
 	Ecra();
 };
