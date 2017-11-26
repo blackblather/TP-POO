@@ -79,7 +79,7 @@ vector<string> Simulacao::Explode(string str, char del)
 		for (int i = 0; i != tam; i++)
 		{
 			charHere = str.at(i);
-			if (buffer != "" && charHere == ' ') {
+			if (buffer != "" && charHere == del) {
 				partAux.push_back(buffer);
 				buffer = "";
 			}
@@ -90,9 +90,23 @@ vector<string> Simulacao::Explode(string str, char del)
 }
 
 bool Simulacao::ComandoEValido(vector<string> comandoPart) {
-	if (comandoPart.size() == 2) {
+	if (comandoPart.size() == 2)
+		if (comandoPart[0] == "") {
 
-	}
+		} else if (comandoPart[1] == "") {
+
+		} else if (comandoPart[2] == "") {
+
+		} else if (comandoPart[3] == "") {
+
+		} else if (comandoPart[4] == "") {
+
+		} else if (comandoPart[5] == "") {
+
+		} else if (comandoPart[6] == "") {
+
+		}
+
 	return false;
 }
 
