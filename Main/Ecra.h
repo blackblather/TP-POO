@@ -1,4 +1,4 @@
-#pragma once	//Para poder utilizar estrutura "COORD"
+#pragma once
 
 class Ecra
 {
