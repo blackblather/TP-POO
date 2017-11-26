@@ -8,6 +8,7 @@ class Mapa : public Ecra
 {
 
 public:
+	/*OOOOOOOOOOI*/
 	/*Pensar se vale a pena usar este código, ou gerar um array e desenhar o mapa a partir desse array*/
 	/*static void DrawMap(int limite = 10) {
 		for (int i = 0; i < limite + 2; i++)
