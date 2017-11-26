@@ -1,5 +1,8 @@
 #pragma once
 #include "Ecra.h"
+#include "Formiga.h"
+#include "Migalha.h"
+#include "Ninho.h"
 
 class Mapa : public Ecra
 {

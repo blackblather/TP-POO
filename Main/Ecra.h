@@ -3,6 +3,7 @@
 class Ecra
 {
 public:
+	//Mete cursor na posição XY
 	static void gotoxy(posXY pos)
 	{
 		COORD coord;
@@ -10,6 +11,7 @@ public:
 		coord.Y = pos.y;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 	}
+	//Limpa o ecrã
 	static void LimpaEcra() {
 		COORD topLeft = { 0, 0 };
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -26,6 +28,7 @@ public:
 		);
 		SetConsoleCursorPosition(console, topLeft);
 	}
+	//Muda a cor do texto (a partir da posição do cursor)
 	static void SetCorTexto(char* cor)
 	{
 		/*
@@ -56,6 +59,7 @@ public:
 		else if (cor == "default")
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | 0);
 	}
+	//Imprime uma string de uma cor (corNova) e volta à cor inicial (corAntiga)
 	static void PrintTextoColorido(string txt, char* corNova, char* corAntiga) {
 		if (txt.length() > 0)
 		{

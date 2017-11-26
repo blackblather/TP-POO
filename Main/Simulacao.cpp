@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Simulacao.h"
 
-
+//Apresenta os valores das configs iniciais com cores
 void Simulacao::PrintValorPropInicial(string prop)
 {
 	string propVal = "indefinido";
@@ -45,6 +45,7 @@ void Simulacao::PrintValorPropInicial(string prop)
 	Ecra::PrintTextoColorido(propVal, (propVal == "indefinido"?"vermelho":"verde") , "default");
 }
 
+//Imprime o ecrã das configs iniciais
 void Simulacao::PrintConfigsIniciais() {
 	cout << "Configura" << (char)135 << (char)147 << "es iniciais:\r\n\nComandos:\r\n";
 
@@ -60,6 +61,7 @@ void Simulacao::PrintConfigsIniciais() {
 	cout << " -> inicio\r\n\n";
 }
 
+//Divide uma string por "del", retorna array
 vector<string> Simulacao::explode(string str, char del)
 {
 	string buff{ "" };
@@ -81,20 +83,24 @@ vector<string> Simulacao::explode(string str, char del)
 	return v;
 }
 
+//Lê comando e guarda na var "comando" da classe
 void Simulacao::ScanConfig() {
 	cout << "Sintaxe: [COMANDO] [VALOR]\r\n";
 	cout << "Escreva o comando a executar : \r\n";
 	cin >> comando;
 }
 
+//TODO: Começa simulação
 void Simulacao::Start() {
 	cout << "COMECOU A SIMULACAO";
 }
 
+//Construtor Simulação
 Simulacao::Simulacao()
 {
 }
 
+//Destrutor simulação (Liberta memória)
 Simulacao::~Simulacao()
 {
 	delete mapa;

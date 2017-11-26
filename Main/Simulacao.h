@@ -1,9 +1,5 @@
 #pragma once
-#include <map>
 #include "Mapa.h"
-#include "Formiga.h"
-#include "Migalha.h"
-#include "Ninho.h"
 
 class Simulacao
 {
