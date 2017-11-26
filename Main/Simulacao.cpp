@@ -61,33 +61,45 @@ void Simulacao::PrintConfigsIniciais() {
 	cout << " -> inicio\r\n\n";
 }
 
-//Divide uma string por "del", retorna array
-vector<string> Simulacao::explode(string str, char del)
-{
-	string buff{ "" };
-	vector<string> v;
-
-	for (auto n : str)
-	{
-		if (n != del)
-			buff += n;
-		else if (n == del && buff != "")
-		{
-			v.push_back(buff);
-			buff = "";
-		}
-	}
-	if (buff != "")
-		v.push_back(buff);
-
-	return v;
-}
-
 //Lê comando e guarda na var "comando" da classe
 void Simulacao::ScanConfig() {
 	cout << "Sintaxe: [COMANDO] [VALOR]\r\n";
 	cout << "Escreva o comando a executar : \r\n";
-	cin >> comando;
+	getline(cin, comando);
+}
+
+vector<string> Simulacao::Explode(string str, char del)
+{
+	vector<string> partAux;
+	string buffer = "";
+	int tam = str.length();
+	char charHere;
+
+	if (tam > 0)
+		for (int i = 0; i != tam; i++)
+		{
+			charHere = str.at(i);
+			if (buffer != "" && charHere == ' ') {
+				partAux.push_back(buffer);
+				buffer = "";
+			}
+			else if(charHere != ' ')
+				buffer += charHere;
+		}
+	return partAux;
+}
+
+bool Simulacao::ComandoEValido(vector<string> comandoPart) {
+	if (comandoPart.size() == 2) {
+
+	}
+	return false;
+}
+
+void Simulacao::ExecutaComando() {
+	vector<string> comandoPart = Explode(comando, ' ');
+	cout << comandoPart[0] << endl;
+	cout << comandoPart[1] << endl;
 }
 
 //TODO: Começa simulação

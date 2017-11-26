@@ -5,6 +5,7 @@ class Simulacao
 {
 	//VARS
 	string comando;
+	//vector<string> comandoPart;
 	int limiteMapa = -1,					// defmundo <limiteMapa>
 		energiaInitNinhos = -1,				// defen <energiaInitNinhos>
 		energiaNinhoParaFormiga = 1,		// defvt <energiaNinhoParaFormiga>
@@ -18,16 +19,13 @@ class Simulacao
 
 	//FUNÇÕES
 	void PrintValorPropInicial(string prop);
-	vector<string> explode(string s, char c);
-	bool ComandoEValido()
-	{
-		return false;
-	}
+	vector<string> Explode(string str, char del);
+	bool ComandoEValido(vector<string> comandoPart);
 public:
 	void PrintConfigsIniciais();
 	void ScanConfig();
+	void ExecutaComando();
 	void Start();
 	Simulacao();
 	~Simulacao();
 };
-
