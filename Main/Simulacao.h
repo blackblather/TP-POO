@@ -7,6 +7,8 @@
 
 class Simulacao
 {
+	//VARS
+	string comando;
 	int limiteMapa = -1,					// defmundo <limiteMapa>
 		energiaInitNinhos = -1,				// defen <energiaInitNinhos>
 		energiaNinhoParaFormiga = 1,		// defvt <energiaNinhoParaFormiga>
@@ -17,7 +19,14 @@ class Simulacao
 	double percentEnergiaNovaFormiga = -1,	// defpc <percentEnergiaNovaFormiga>
 		percentDeMigalhasIniciais = -1;		// defmi <percentDeMigalhasIniciais>
 	Mapa* mapa;
-	void PrintValorProp(string prop);
+
+	//FUNÇÕES
+	void PrintValorPropInicial(string prop);
+	vector<string> explode(string s, char c);
+	bool ComandoEValido()
+	{
+		return false;
+	}
 public:
 	void PrintConfigsIniciais();
 	void ScanConfig();

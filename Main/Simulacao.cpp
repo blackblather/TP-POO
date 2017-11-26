@@ -2,7 +2,7 @@
 #include "Simulacao.h"
 
 
-void Simulacao::PrintValorProp(string prop)
+void Simulacao::PrintValorPropInicial(string prop)
 {
 	string propVal = "indefinido";
 
@@ -48,22 +48,43 @@ void Simulacao::PrintValorProp(string prop)
 void Simulacao::PrintConfigsIniciais() {
 	cout << "Configura" << (char)135 << (char)147 << "es iniciais:\r\n\nComandos:\r\n";
 
-	cout << " -> defmundo     "; PrintValorProp("defmundo"); cout << "\r\n";
-	cout << " -> defen        "; PrintValorProp("defen"); cout << "\r\n";
-	cout << " -> defpc        "; PrintValorProp("defpc"); cout << "\r\n";
-	cout << " -> defvt        "; PrintValorProp("defvt"); cout << "\r\n";
-	cout << " -> defmi        "; PrintValorProp("defmi"); cout << "\r\n";
-	cout << " -> defme        "; PrintValorProp("defme"); cout << "\r\n";
-	cout << " -> defnm        "; PrintValorProp("defnm"); cout << "\r\n";
+	cout << " -> defmundo     "; PrintValorPropInicial("defmundo"); cout << "\r\n";
+	cout << " -> defen        "; PrintValorPropInicial("defen"); cout << "\r\n";
+	cout << " -> defpc        "; PrintValorPropInicial("defpc"); cout << "\r\n";
+	cout << " -> defvt        "; PrintValorPropInicial("defvt"); cout << "\r\n";
+	cout << " -> defmi        "; PrintValorPropInicial("defmi"); cout << "\r\n";
+	cout << " -> defme        "; PrintValorPropInicial("defme"); cout << "\r\n";
+	cout << " -> defnm        "; PrintValorPropInicial("defnm"); cout << "\r\n";
 	
 	cout << " -> executa      <nomeficheiro>\r\n";
 	cout << " -> inicio\r\n\n";
 }
 
+vector<string> Simulacao::explode(string str, char del)
+{
+	string buff{ "" };
+	vector<string> v;
+
+	for (auto n : str)
+	{
+		if (n != del)
+			buff += n;
+		else if (n == del && buff != "")
+		{
+			v.push_back(buff);
+			buff = "";
+		}
+	}
+	if (buff != "")
+		v.push_back(buff);
+
+	return v;
+}
 
 void Simulacao::ScanConfig() {
-		cout << "Sintaxe: [COMANDO] [VALOR]\r\n";
-		cout << "Escreva o comando a executar : \r\n";
+	cout << "Sintaxe: [COMANDO] [VALOR]\r\n";
+	cout << "Escreva o comando a executar : \r\n";
+	cin >> comando;
 }
 
 void Simulacao::Start() {
