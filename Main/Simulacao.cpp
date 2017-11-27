@@ -76,6 +76,7 @@ vector<string> Simulacao::Explode(string str, char del)
 	char charHere;
 
 	if (tam > 0)
+	{
 		for (int i = 0; i != tam; i++)
 		{
 			charHere = str.at(i);
@@ -83,44 +84,44 @@ vector<string> Simulacao::Explode(string str, char del)
 				partAux.push_back(buffer);
 				buffer = "";
 			}
-			else if(charHere != ' ')
+			else if (charHere != ' ')
 				buffer += charHere;
 		}
+	}
+	if (buffer != "")
+		partAux.push_back(buffer);
+
 	return partAux;
 }
 
 bool Simulacao::ComandoEValido(vector<string> comandoPart) {
 	if (comandoPart.size() == 2)
-		if (comandoPart[0] == "defmundo") {
-			if (stoi(comandoPart[1], nullptr, 10) >= 10)
-				return true;
-		} else if (comandoPart[0] == "defen") {
-			if (stoi(comandoPart[1], nullptr, 10) >= 1)
-				return true;
-		} else if (comandoPart[0] == "defvt") {
-			if (stoi(comandoPart[1], nullptr, 10) >= 10)
-				return true;
-		} else if (comandoPart[0] == "defme") {
-			if (stoi(comandoPart[1], nullptr, 10) >= 10)
-				return true;
-		} else if (comandoPart[0] == "defnm") {
-			if (stoi(comandoPart[1], nullptr, 10) >= 10)
-				return true;
-		} else if (comandoPart[0] == "defpc") {
-			if (stoi(comandoPart[1], nullptr, 10) > 0)
-				return true;
-		} else if (comandoPart[0] == "defmi") {
-			if (stoi(comandoPart[1], nullptr, 10) >= 10)
-				return true;
-		}
+		if (comandoPart[0] == "defmundo" && stoi(comandoPart[1], nullptr, 10) >= 10)
+			return true;
+		else if (comandoPart[0] == "defen" && stoi(comandoPart[1], nullptr, 10) >= 1)
+				 return true;
+		else if (comandoPart[0] == "defvt" && stoi(comandoPart[1], nullptr, 10) >= 1)
+				 return true;
+		else if (comandoPart[0] == "defme" && stoi(comandoPart[1], nullptr, 10) >= 1)
+				 return true;
+		else if (comandoPart[0] == "defnm" && stoi(comandoPart[1], nullptr, 10) >= 1)
+				 return true;
+		else if (comandoPart[0] == "defpc" && stod(comandoPart[1]) >= 0 && stod(comandoPart[1]) <= 100)
+				 return true;
+		else if (comandoPart[0] == "defmi" && stod(comandoPart[1]) >= 0 && stod(comandoPart[1]) <= 100)
+				 return true;
 
 	return false;
 }
 
 void Simulacao::ExecutaComando() {
 	vector<string> comandoPart = Explode(comando, ' ');
-	cout << comandoPart[0] << endl;
-	cout << comandoPart[1] << endl;
+	if (ComandoEValido(comandoPart))
+	{
+		//DOES STUFF
+		cout << comandoPart[0] << endl;
+		cout << comandoPart[1] << endl;
+	}
 }
 
 //TODO: Começa simulação

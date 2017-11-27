@@ -5,7 +5,7 @@ class Simulacao
 {
 	//VARS
 	string comando;
-	//vector<string> comandoPart;
+	map<string, boost::variant<int, double>> configsIniciais;
 	int limiteMapa = -1,					// defmundo <limiteMapa>
 		energiaInitNinhos = -1,				// defen <energiaInitNinhos>
 		energiaNinhoParaFormiga = 1,		// defvt <energiaNinhoParaFormiga>
