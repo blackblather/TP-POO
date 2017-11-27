@@ -91,20 +91,27 @@ vector<string> Simulacao::Explode(string str, char del)
 
 bool Simulacao::ComandoEValido(vector<string> comandoPart) {
 	if (comandoPart.size() == 2)
-		if (comandoPart[0] == "") {
-
-		} else if (comandoPart[1] == "") {
-
-		} else if (comandoPart[2] == "") {
-
-		} else if (comandoPart[3] == "") {
-
-		} else if (comandoPart[4] == "") {
-
-		} else if (comandoPart[5] == "") {
-
-		} else if (comandoPart[6] == "") {
-
+		if (comandoPart[0] == "defmundo") {
+			if (stoi(comandoPart[1], nullptr, 10) >= 10)
+				return true;
+		} else if (comandoPart[0] == "defen") {
+			if (stoi(comandoPart[1], nullptr, 10) >= 1)
+				return true;
+		} else if (comandoPart[0] == "defvt") {
+			if (stoi(comandoPart[1], nullptr, 10) >= 10)
+				return true;
+		} else if (comandoPart[0] == "defme") {
+			if (stoi(comandoPart[1], nullptr, 10) >= 10)
+				return true;
+		} else if (comandoPart[0] == "defnm") {
+			if (stoi(comandoPart[1], nullptr, 10) >= 10)
+				return true;
+		} else if (comandoPart[0] == "defpc") {
+			if (stoi(comandoPart[1], nullptr, 10) > 0)
+				return true;
+		} else if (comandoPart[0] == "defmi") {
+			if (stoi(comandoPart[1], nullptr, 10) >= 10)
+				return true;
 		}
 
 	return false;
