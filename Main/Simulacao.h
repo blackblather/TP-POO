@@ -26,6 +26,7 @@ class Simulacao
 	bool ComandoEValido(const vector<string>& comandoPart);
 
 public:
+	const string Comando() const;
 	void PrintConfigsIniciais();
 	void ScanConfig();
 	void SetConfigInicial();

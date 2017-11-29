@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Simulacao.h"
 
+const string Simulacao::Comando() const {
+	return comando;
+}
+
 int Simulacao::PropNameToArrayIndex(const string& str)
 {
 	if (str == "defmundo") return limiteMapa;
