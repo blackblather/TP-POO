@@ -80,20 +80,24 @@ vector<string> Simulacao::Explode(const string& str, const char& del)
 
 bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 	if (comandoPart.size() == 2) {
-		int valor = stoi(comandoPart[1], nullptr, 10);
-		if ((comandoPart[0] == "defmundo" && valor >= 10) ||
-			((comandoPart[0] == "defen" || comandoPart[0] == "defvt" || comandoPart[0] == "defme" || comandoPart[0] == "defnm") && valor >= 1) || 
-			((comandoPart[0] == "defpc" || comandoPart[0] == "defmi") && valor >= 0 && valor <= 100))
-			return true;
+		if (comandoPart[0] != "executa") {
+			int valor = stoi(comandoPart[1], nullptr, 10);
+			if ((comandoPart[0] == "defmundo" && valor >= 10) ||
+				((comandoPart[0] == "defen" || comandoPart[0] == "defvt" || comandoPart[0] == "defme" || comandoPart[0] == "defnm") && valor >= 1) ||
+				((comandoPart[0] == "defpc" || comandoPart[0] == "defmi") && valor >= 0 && valor <= 100))
+				return true;
+		}
+		else
+			return true; //verificar aqui se o nome do ficheiro é válido
 	}
+	else if (comandoPart.size() == 1 && comandoPart[0] == "inicia")
+		return true;
+
 	return false;
 }
 
-void Simulacao::SetConfigInicial() {
-	vector<string> comandoPart = Explode(comando, ' ');
-	if (ComandoEValido(comandoPart)) {
-		configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
-	}
+void Simulacao::SetConfigInicial(vector<string> comandoPart) {
+	configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
 }
 
 //TODO: Começa simulação
@@ -109,7 +113,7 @@ Simulacao::Simulacao()
 	configsIniciais[energiaInitNinhos] = -1;			// defen <energiaInitNinhos>
 	configsIniciais[energiaNinhoParaFormiga] = 1;		// defvt <energiaNinhoParaFormiga>
 	configsIniciais[energiaNovasMigalhas] = -1;			// defme <energiaNovasMigalhas>
-	configsIniciais[qtdMigalhasIniciais] = -1;			/*AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)*/
+	//configsIniciais[qtdMigalhasIniciais] = -1;			/*AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)*/
 	configsIniciais[maxMigalhasPorIteracao] = -1;		// defnm <maxMigalhas>
 	configsIniciais[percentEnergiaNovaFormiga] = -1;	// defpc <percentEnergiaNovaFormiga>
 	configsIniciais[percentDeMigalhasIniciais] = -1;	// defmi <percentDeMigalhasIniciais>

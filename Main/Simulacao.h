@@ -10,10 +10,10 @@ class Simulacao
 		energiaInitNinhos,
 		energiaNinhoParaFormiga,
 		energiaNovasMigalhas,
-		qtdMigalhasIniciais,
 		maxMigalhasPorIteracao,
 		percentEnergiaNovaFormiga,
 		percentDeMigalhasIniciais,
+		qtdMigalhasIniciais,		//AUX
 		qtdConfigsInciais
 	};
 	int configsIniciais[qtdConfigsInciais];
@@ -22,14 +22,14 @@ class Simulacao
 	//FUNÇÕES
 	int PropNameToArrayIndex(const string& str);
 	void PrintValorPropInicial(const string& prop);
-	vector<string> Explode(const string& str, const char& del);
-	bool ComandoEValido(const vector<string>& comandoPart);
 
 public:
+	bool ComandoEValido(const vector<string>& comandoPart);
+	vector<string> Explode(const string& str, const char& del);
 	const string Comando() const;
 	void PrintConfigsIniciais();
 	void ScanConfig();
-	void SetConfigInicial();
+	void SetConfigInicial(vector<string> comandoPart);
 	void Start();
 	Simulacao();
 	~Simulacao();
