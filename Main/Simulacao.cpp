@@ -1,46 +1,26 @@
 #include "stdafx.h"
 #include "Simulacao.h"
 
+int Simulacao::PropNameToArrayIndex(const string& str)
+{
+	if (str == "defmundo") return limiteMapa;
+	else if (str == "defen") return energiaInitNinhos;
+	else if (str == "defpc") return percentEnergiaNovaFormiga;
+	else if (str == "defvt") return energiaNinhoParaFormiga;
+	else if (str == "defmi") return percentDeMigalhasIniciais;
+	else if (str == "defme") return energiaNovasMigalhas;
+	else if (str == "defnm") return maxMigalhasPorIteracao;
+	return -1;
+}
+
 //Apresenta os valores das configs iniciais com cores
-void Simulacao::PrintValorPropInicial(string prop)
+void Simulacao::PrintValorPropInicial(const string& prop)
 {
 	string propVal = "indefinido";
 
-	if (prop == "defmundo")
-	{
-		if (limiteMapa != -1)
-			propVal = to_string(limiteMapa);
-	}
-	else if (prop == "defen")
-	{
-		if (energiaInitNinhos != -1)
-			propVal = to_string(energiaInitNinhos);
-	}
-	else  if (prop == "defpc")
-	{
-		if (percentEnergiaNovaFormiga != -1)
-			propVal = to_string(percentEnergiaNovaFormiga);
-	}
-	else  if (prop == "defvt")
-	{
-		if (energiaNinhoParaFormiga != -1)
-			propVal = to_string(energiaNinhoParaFormiga);
-	}
-	else  if (prop == "defmi")
-	{
-		if (percentDeMigalhasIniciais != -1)
-			propVal = to_string(percentDeMigalhasIniciais);
-	}
-	else  if (prop == "defme")
-	{
-		if (energiaNovasMigalhas != -1)
-			propVal = to_string(energiaNovasMigalhas);
-	}
-	else  if (prop == "defnm")
-	{
-		if (maxMigalhasPorIteracao != -1)
-			propVal = to_string(maxMigalhasPorIteracao);
-	}
+	if (prop == "defmundo" || prop == "defen" || prop == "defpc" || prop == "defvt" || prop == "defmi" || prop == "defme" || prop == "defnm")
+		if (configsIniciais[PropNameToArrayIndex(prop)] != -1)
+			propVal = to_string(configsIniciais[PropNameToArrayIndex(prop)]);
 	
 	Ecra::PrintTextoColorido(propVal, (propVal == "indefinido"?"vermelho":"verde") , "default");
 }
@@ -68,7 +48,7 @@ void Simulacao::ScanConfig() {
 	getline(cin, comando);
 }
 
-vector<string> Simulacao::Explode(string str, char del)
+vector<string> Simulacao::Explode(const string& str, const char& del)
 {
 	vector<string> partAux;
 	string buffer = "";
@@ -84,7 +64,7 @@ vector<string> Simulacao::Explode(string str, char del)
 				partAux.push_back(buffer);
 				buffer = "";
 			}
-			else if (charHere != ' ')
+			else if (charHere != del)
 				buffer += charHere;
 		}
 	}
@@ -94,33 +74,21 @@ vector<string> Simulacao::Explode(string str, char del)
 	return partAux;
 }
 
-bool Simulacao::ComandoEValido(vector<string> comandoPart) {
-	if (comandoPart.size() == 2)
-		if (comandoPart[0] == "defmundo" && stoi(comandoPart[1], nullptr, 10) >= 10)
+bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
+	if (comandoPart.size() == 2) {
+		int valor = stoi(comandoPart[1], nullptr, 10);
+		if ((comandoPart[0] == "defmundo" && valor >= 10) ||
+			((comandoPart[0] == "defen" || comandoPart[0] == "defvt" || comandoPart[0] == "defme" || comandoPart[0] == "defnm") && valor >= 1) || 
+			((comandoPart[0] == "defpc" || comandoPart[0] == "defmi") && valor >= 0 && valor <= 100))
 			return true;
-		else if (comandoPart[0] == "defen" && stoi(comandoPart[1], nullptr, 10) >= 1)
-				 return true;
-		else if (comandoPart[0] == "defvt" && stoi(comandoPart[1], nullptr, 10) >= 1)
-				 return true;
-		else if (comandoPart[0] == "defme" && stoi(comandoPart[1], nullptr, 10) >= 1)
-				 return true;
-		else if (comandoPart[0] == "defnm" && stoi(comandoPart[1], nullptr, 10) >= 1)
-				 return true;
-		else if (comandoPart[0] == "defpc" && stod(comandoPart[1]) >= 0 && stod(comandoPart[1]) <= 100)
-				 return true;
-		else if (comandoPart[0] == "defmi" && stod(comandoPart[1]) >= 0 && stod(comandoPart[1]) <= 100)
-				 return true;
-
+	}
 	return false;
 }
 
-void Simulacao::ExecutaComando() {
+void Simulacao::SetConfigInicial() {
 	vector<string> comandoPart = Explode(comando, ' ');
-	if (ComandoEValido(comandoPart))
-	{
-		//DOES STUFF
-		cout << comandoPart[0] << endl;
-		cout << comandoPart[1] << endl;
+	if (ComandoEValido(comandoPart)) {
+		configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
 	}
 }
 
@@ -132,10 +100,20 @@ void Simulacao::Start() {
 //Construtor Simulação
 Simulacao::Simulacao()
 {
+	//Inicializa as configs iniciais
+	configsIniciais[limiteMapa] = -1;					// defmundo <limiteMapa>
+	configsIniciais[energiaInitNinhos] = -1;			// defen <energiaInitNinhos>
+	configsIniciais[energiaNinhoParaFormiga] = 1;		// defvt <energiaNinhoParaFormiga>
+	configsIniciais[energiaNovasMigalhas] = -1;			// defme <energiaNovasMigalhas>
+	configsIniciais[qtdMigalhasIniciais] = -1;			/*AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)*/
+	configsIniciais[maxMigalhasPorIteracao] = -1;		// defnm <maxMigalhas>
+	configsIniciais[percentEnergiaNovaFormiga] = -1;	// defpc <percentEnergiaNovaFormiga>
+	configsIniciais[percentDeMigalhasIniciais] = -1;	// defmi <percentDeMigalhasIniciais>
 }
 
-//Destrutor simulação (Liberta memória)
+//Destrutor simulação
 Simulacao::~Simulacao()
 {
+	//Liberta memória
 	delete mapa;
 }

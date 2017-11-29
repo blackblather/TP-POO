@@ -4,7 +4,7 @@ class Ecra
 {
 public:
 	//Mete cursor na posição XY
-	static void gotoxy(posXY pos)
+	static void gotoxy(const posXY& pos)
 	{
 		COORD coord;
 		coord.X = pos.x;
@@ -29,7 +29,7 @@ public:
 		SetConsoleCursorPosition(console, topLeft);
 	}
 	//Muda a cor do texto (a partir da posição do cursor)
-	static void SetCorTexto(char* cor)
+	static void SetCorTexto(const char* cor)
 	{
 		/*
 		 * 0   BLACK
@@ -49,7 +49,9 @@ public:
 		 * 14  YELLOW
 		 * 15  WHITE
 		 */
-
+		/*011001010*/
+		/*000000000*/
+		/*011001010*/
 		if (cor == "vermelho")
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0);
 		else if (cor == "verde")
@@ -60,7 +62,7 @@ public:
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7 | 0);
 	}
 	//Imprime uma string de uma cor (corNova) e volta à cor inicial (corAntiga)
-	static void PrintTextoColorido(string txt, char* corNova, char* corAntiga) {
+	static void PrintTextoColorido(const string& txt, const char* corNova, const char* corAntiga) {
 		if (txt.length() > 0)
 		{
 			SetCorTexto(corNova);

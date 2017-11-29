@@ -1,2 +1,5 @@
-﻿  stdafx.cpp
-c:\users\eleut\google drive\licenciatura (2016-xxxx)\2017 - 2018\semestre 1\poo\tp\main\stdafx.h(7): fatal error C1083: Cannot open include file: 'boost': No such file or directory
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Main2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Simulacao.cpp
+  Main.cpp
+  Generating Code...
+  Main.vcxproj -> C:\Users\joaom\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.exe
