@@ -78,7 +78,7 @@ vector<string> Simulacao::Explode(const string& str, const char& del)
 	return partAux;
 }
 
-void Simulacao::ExecutaFicheiro(string fileName) {
+void Simulacao::ExecutaFicheiro(const string& fileName) {
 	vector<string> comandoPart;
 	ifstream commandsFile(fileName);
 	if (commandsFile.is_open())
@@ -113,6 +113,21 @@ bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 
 void Simulacao::SetConfigInicial(vector<string> comandoPart) {
 	configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
+}
+
+/*
+ * Verifica se todas as configs iniciais estão definidas.
+ * Usado para verificar se pode começar a simulação.
+ */
+bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
+	//Assume que as que não estão definidas, têm valor: -1
+	int totalConfigsSet = 0;
+	for (int i = 0; i != qtdConfigsInciais; i++)
+		if (configsIniciais[i] != -1)
+			totalConfigsSet++;
+	if (totalConfigsSet == qtdConfigsInciais)
+		return true;
+	return false;
 }
 
 //TODO: Começa simulação
