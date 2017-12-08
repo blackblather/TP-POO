@@ -24,6 +24,7 @@ class Simulacao
 	void PrintValorPropInicial(const string& prop);
 
 public:
+	void ExecutaFicheiro(string fileName);
 	bool ComandoEValido(const vector<string>& comandoPart);
 	vector<string> Explode(const string& str, const char& del);
 	const string Comando() const;

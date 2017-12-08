@@ -48,7 +48,7 @@ void Simulacao::PrintConfigsIniciais() {
 //Lê comando e guarda na var "comando" da classe
 void Simulacao::ScanConfig() {
 	cout << "Sintaxe: [COMANDO] [VALOR]\r\n";
-	cout << "Escreva o comando a executar : \r\n";
+	cout << "Escreva o comando a executar: \r\n";
 	getline(cin, comando);
 }
 
@@ -76,6 +76,21 @@ vector<string> Simulacao::Explode(const string& str, const char& del)
 		partAux.push_back(buffer);
 
 	return partAux;
+}
+
+void Simulacao::ExecutaFicheiro(string fileName) {
+	vector<string> comandoPart;
+	ifstream commandsFile(fileName);
+	if (commandsFile.is_open())
+	{
+		while (getline(commandsFile, comando))
+		{
+			comandoPart = Explode(comando, ' ');
+			if (ComandoEValido(comandoPart))
+				SetConfigInicial(comandoPart);
+		}
+		commandsFile.close();
+	}
 }
 
 bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
