@@ -2,15 +2,17 @@
 #include "Mapa.h"
 
 void Mapa::PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais) {
-	int inseridas = 0, x, y;
+	int inseridas = 0;
 	posXY posAux;
 	while (inseridas < qtdMigalhasIniciais) {
 		posAux.x = rand() % limite;
 		posAux.y = rand() % limite;
-		if (arrMapa[x][y] == ' ') {
+		if (arrMapa[posAux.x][posAux.y] == ' ') {
 			migalhas.push_back(*(new Migalha(posAux)));
-			arrMapa[x][y] = crumbSymbol;
+			arrMapa[posAux.x][posAux.y] = crumbSymbol;
+			inseridas++;
 		}
+		
 	}
 }
 
