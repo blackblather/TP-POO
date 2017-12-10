@@ -13,22 +13,23 @@ class Simulacao
 		maxMigalhasPorIteracao,
 		percentEnergiaNovaFormiga,
 		percentDeMigalhasIniciais,
-		qtdMigalhasIniciais,		//AUX
+		//qtdMigalhasIniciais,		//AUX
 		qtdConfigsInciais
 	};
 	int configsIniciais[qtdConfigsInciais];
 	Mapa* mapa;
 
-	//FUNÇÕES
 	int PropNameToArrayIndex(const string& str);
 	void PrintValorPropInicial(const string& prop);
 
 public:
+	//Gets
+	const string Comando() const;
+	//Funções
 	bool TodasAsConfigIniciasEstaoDefinidas();
 	void ExecutaFicheiro(const string& fileName);
 	bool ComandoEValido(const vector<string>& comandoPart);
 	vector<string> Explode(const string& str, const char& del);
-	const string Comando() const;
 	void PrintConfigsIniciais();
 	void ScanConfig();
 	void SetConfigInicial(vector<string> comandoPart);

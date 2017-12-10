@@ -30,6 +30,6 @@ public:
 		for (int i = 0; i < limite + 2; i++)
 			cout << "X ";
 	}*/
-	Mapa();
+	Mapa(const int& limite, const int& percentDeMigalhasIniciais);
 };
 

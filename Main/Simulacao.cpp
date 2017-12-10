@@ -105,7 +105,7 @@ bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 		else
 			return true; //verificar aqui se o nome do ficheiro é válido
 	}
-	else if (comandoPart.size() == 1 && comandoPart[0] == "inicia")
+	else if (comandoPart.size() == 1 && comandoPart[0] == "inicio")
 		return true;
 
 	return false;
@@ -113,6 +113,7 @@ bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 
 void Simulacao::SetConfigInicial(vector<string> comandoPart) {
 	configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
+
 }
 
 /*
