@@ -7,7 +7,7 @@ void Mapa::PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMiga
 	while (inseridas < qtdMigalhasIniciais) {
 		posAux.x = rand() % limite;
 		posAux.y = rand() % limite;
-		if (arrMapa[x][y] != crumbSymbol) {
+		if (arrMapa[x][y] == ' ') {
 			migalhas.push_back(*(new Migalha(posAux)));
 			arrMapa[x][y] = crumbSymbol;
 		}

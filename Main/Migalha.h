@@ -1,6 +1,6 @@
 #pragma once
 #include "Elemento.h"
-#define crumbSymbol 'n'
+#define crumbSymbol 'm'
 
 class Migalha : Elemento
 {
