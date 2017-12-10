@@ -1,25 +1,35 @@
 #include "stdafx.h"
 #include "Mapa.h"
 
-void Mapa::PreencheMapaComMigalhas(const int& limite, const int& qtdMigalhasIniciais) {
-	for (int x = 0; x < limite; x++) {
-		for (int y = 0; y < limite; y++) {
-
+void Mapa::PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais) {
+	int inseridas = 0, x, y;
+	posXY posAux;
+	while (inseridas < qtdMigalhasIniciais) {
+		posAux.x = rand() % limite;
+		posAux.y = rand() % limite;
+		if (arrMapa[x][y] != crumbSymbol) {
+			migalhas.push_back(*(new Migalha(posAux)));
+			arrMapa[x][y] = crumbSymbol;
 		}
 	}
 }
 
-bool Mapa::InicializaMapaVazio(const int& limite) {
+void Mapa::PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais) {
+	for (int x = 0; x < limite; x++)
+		for (int y = 0; y < limite; y++)
+			arrMapa[x][y] = ' ';
+	PreencheMapaComMigalhasIniciais(limite, qtdMigalhasIniciais);
+}
+
+bool Mapa::InicializaMapa(const int& limite, const int& qtdMigalhasIniciais) {
 	try {
 		arrMapa = new char*[limite];
 		for (int i = 0; i < limite; i++)
 			arrMapa[i] = new char[limite];
-		for (int x = 0; x < limite; x++)
-			for (int y = 0; y < limite; y++)
-				arrMapa[x][y] = 'x';
+		PreencheMapaInicial(limite, qtdMigalhasIniciais);
 		return true;
 	}
-	catch(int ex) {
+	catch(std::bad_alloc& ba) {
 		return false;
 	}
 }
@@ -28,11 +38,11 @@ void Mapa::DrawMap(const int& limite) {
 	for (int i = 0; i < limite + 2; i++)
 		cout << "X ";
 	cout << "\n";
-	for (int l = 0; l < limite; l++)
+	for (int x = 0; x < limite; x++)
 	{
 		cout << "X ";
-		for (int h = 0; h < limite; h++)
-			cout << arrMapa[l][h] << ' ';
+		for (int y = 0; y < limite; y++)
+			cout << arrMapa[x][y] << ' ';
 		cout << "X\n";
 	}
 
@@ -40,14 +50,9 @@ void Mapa::DrawMap(const int& limite) {
 		cout << "X ";
 }
 
-Mapa::Mapa(const int& limite, const int& percentDeMigalhasIniciais)
-{
-	/* Converter a percentagem de migalhas para uma quantidade aqui dentro.
-	 * É para evitar ter um if em "Simulacao::SetConfigInicial(...)".
-	 */
-	 //qtdMigalhasIniciais	AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)
-	int qtdMigalhasIniciais;
-	if (InicializaMapaVazio(limite)) {
+Mapa::Mapa(const int& limite, const int& percentDeMigalhasIniciais) {
+   //int qtdMigalhasIniciais = (int)((limite*limite) * percentDeMigalhasIniciais / 100));
+	if (InicializaMapa(limite, (int)((limite*limite) * percentDeMigalhasIniciais / 100))) {
 		DrawMap(limite);
 		//PreencheMapaComMigalhas(limite, qtdMigalhasIniciais);
 	}

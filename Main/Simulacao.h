@@ -13,7 +13,6 @@ class Simulacao
 		maxMigalhasPorIteracao,
 		percentEnergiaNovaFormiga,
 		percentDeMigalhasIniciais,
-		//qtdMigalhasIniciais,		//AUX
 		qtdConfigsInciais
 	};
 	int configsIniciais[qtdConfigsInciais];
@@ -23,9 +22,9 @@ class Simulacao
 	void PrintValorPropInicial(const string& prop);
 
 public:
-	//Gets
+	/*Gets/Sets*/
 	const string Comando() const;
-	//Funções
+	/***************/
 	bool TodasAsConfigIniciasEstaoDefinidas();
 	void ExecutaFicheiro(const string& fileName);
 	bool ComandoEValido(const vector<string>& comandoPart);
