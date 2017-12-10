@@ -133,7 +133,7 @@ bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 
 //TODO: Começa simulação
 void Simulacao::Start() {
-	cout << "COMECOU A SIMULACAO";
+	mapa = new Mapa(configsIniciais[limiteMapa], configsIniciais[percentDeMigalhasIniciais]);
 }
 
 //Construtor Simulação
@@ -144,7 +144,6 @@ Simulacao::Simulacao()
 	configsIniciais[energiaInitNinhos] = -1;			// defen <energiaInitNinhos>
 	configsIniciais[energiaNinhoParaFormiga] = 1;		// defvt <energiaNinhoParaFormiga>
 	configsIniciais[energiaNovasMigalhas] = -1;			// defme <energiaNovasMigalhas>
-	//configsIniciais[qtdMigalhasIniciais] = -1;			/*AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)*/
 	configsIniciais[maxMigalhasPorIteracao] = -1;		// defnm <maxMigalhas>
 	configsIniciais[percentEnergiaNovaFormiga] = -1;	// defpc <percentEnergiaNovaFormiga>
 	configsIniciais[percentDeMigalhasIniciais] = -1;	// defmi <percentDeMigalhasIniciais>

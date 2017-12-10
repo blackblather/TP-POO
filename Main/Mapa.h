@@ -6,7 +6,9 @@
 
 class Mapa : public Ecra
 {
-
+	char** arrMapa;
+	void PreencheMapaComMigalhas(const int& limite, const int& qtdMigalhasIniciais);
+	bool InicializaMapaVazio(const int& limite);
 public:
 	/*Pensar se vale a pena usar este código, ou gerar um array e desenhar o mapa a partir desse array*/
 	/*static void DrawMap(int limite = 10) {
@@ -30,6 +32,8 @@ public:
 		for (int i = 0; i < limite + 2; i++)
 			cout << "X ";
 	}*/
+	void DrawMap(const int& limite);
 	Mapa(const int& limite, const int& percentDeMigalhasIniciais);
 };
 
+ 

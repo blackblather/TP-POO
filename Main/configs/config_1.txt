@@ -1,3 +1,7 @@
-defmundo 9
-defmundo 95
-defmundo 2
+defmundo 10
+defen 1
+defpc 1
+defvt 1
+defmi 1
+defme 1
+defnm 1
