@@ -1,11 +1,14 @@
 #pragma once
 #include "Elemento.h"
+#include "Formiga.h"
+#define nestSymbol 'N'
 class Ninho : Elemento
 {
-	const int ID_ninho;
+	static int N_ninho;
+	int ID_ninho;
 	vector<Formiga> formigas;
 public:
-	Ninho();
+	Ninho(posXY pos);
 	~Ninho();
 };
 

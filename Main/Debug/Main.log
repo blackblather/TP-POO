@@ -1,3 +1,9 @@
-﻿  Mapa.cpp
-c:\users\gusta\source\repos\tp-poo2\main\mapa.cpp(33): warning C4101: 'ba': unreferenced local variable
+﻿  Main.cpp
+c:\users\gusta\source\repos\tp-poo2\main\main.cpp(7): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  Compiling...
+  Simulacao.cpp
+  Mapa.cpp
+c:\users\gusta\source\repos\tp-poo2\main\mapa.cpp(34): warning C4101: 'ba': unreferenced local variable
+  Generating Code...
   Main.vcxproj -> C:\Users\gusta\Source\Repos\TP-POO2\Debug\Main.exe

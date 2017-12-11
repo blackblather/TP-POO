@@ -1,9 +1,11 @@
 #pragma once
 #include "Elemento.h"
+#define antSymbol 'f'
 class Formiga : Elemento
 {
-	const int ID_formiga;
+	static int N_formiga;
+	int ID_formiga;
 public:
-	Formiga();
+	Formiga(posXY pos);
 };
 

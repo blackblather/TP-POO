@@ -16,6 +16,22 @@ void Mapa::PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMiga
 	}
 }
 
+void Mapa::PreencheMapaComNinhosIniciais(const int& limite) {
+	int qtd_ninhos = 2; //placeholder
+	int inseridas = 0;
+	posXY posAux;
+	while (inseridas < qtd_ninhos) {
+		posAux.x = rand() % limite;
+		posAux.y = rand() % limite;
+		if (arrMapa[posAux.x][posAux.y] == ' ') {
+			formigas.push_back(*(new Formiga(posAux)));
+			arrMapa[posAux.x][posAux.y] = nestSymbol;
+			inseridas++;
+		}
+
+	}
+}
+
 void Mapa::PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais) {
 	for (int x = 0; x < limite; x++)
 		for (int y = 0; y < limite; y++)
