@@ -12,7 +12,6 @@ class Mapa : public Ecra
 	vector<Formiga> formigas;
 	void PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais);
 	void PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais);
-	void PreencheMapaComNinhosIniciais(const int& limite);
 	//void PreencheMapaComFormigas();
 	bool InicializaMapa(const int& limite, const int& qtdMigalhasIniciais);
 public:
