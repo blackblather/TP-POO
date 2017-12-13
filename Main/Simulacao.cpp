@@ -94,7 +94,7 @@ void Simulacao::ExecutaFicheiro(const string& fileName) {
 }
 
 bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
-	if (comandoPart.size() == 2) {
+	if (comandoPart.size() == 2)
 		if (comandoPart[0] != "executa") {
 			int valor = stoi(comandoPart[1], nullptr, 10);
 			if ((comandoPart[0] == "defmundo" && valor >= 10) ||
@@ -103,11 +103,9 @@ bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 				return true;
 		}
 		else
-			return true; //verificar aqui se o nome do ficheiro é válido
-	}
+			return true;
 	else if (comandoPart.size() == 1 && comandoPart[0] == "inicio")
 		return true;
-
 	return false;
 }
 
@@ -116,10 +114,7 @@ void Simulacao::SetConfigInicial(vector<string> comandoPart) {
 
 }
 
-/*
- * Verifica se todas as configs iniciais estão definidas.
- * Usado para verificar se pode começar a simulação.
- */
+//Verifica se todas as configs iniciais estão definidas. Usado para verificar se pode começar a simulação.
 bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 	//Assume que as que não estão definidas, têm valor: -1
 	int totalConfigsSet = 0;
@@ -131,9 +126,10 @@ bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 	return false;
 }
 
-//TODO: Começa simulação
-void Simulacao::Start() {
-	mapa = new Mapa(configsIniciais[limiteMapa], configsIniciais[percentDeMigalhasIniciais]);
+void Simulacao::InicializaMapa() {
+	mapa = new Mapa(configsIniciais[limiteMapa],
+					configsIniciais[energiaNovasMigalhas],
+					configsIniciais[percentDeMigalhasIniciais]);
 }
 
 //Construtor Simulação

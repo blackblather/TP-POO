@@ -10,11 +10,11 @@ class Mapa : public Ecra
 	vector<Migalha> migalhas;
 	vector<Ninho> ninhos;
 	vector<Formiga> formigas;
-	void PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais);
-	void PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais);
+	void PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
+	void PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
 	//void PreencheMapaComFormigas();
-	bool InicializaMapa(const int& limite, const int& qtdMigalhasIniciais);
+	bool InicializaArrayMapa(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
 public:
 	void DrawMap(const int& limite);
-	Mapa(const int& limite, const int& percentDeMigalhasIniciais);
+	Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais);
 };

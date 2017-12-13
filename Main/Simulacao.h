@@ -32,7 +32,7 @@ public:
 	void PrintConfigsIniciais();
 	void ScanConfig();
 	void SetConfigInicial(vector<string> comandoPart);
-	void Start();
+	void InicializaMapa();
 	Simulacao();
 	~Simulacao();
 };

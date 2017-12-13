@@ -5,7 +5,7 @@
 class Migalha : Elemento
 {
 public:
-	Migalha(posXY pos);
+	Migalha(posXY pos, const int& energiaMigalha);
 	~Migalha();
 };
 
