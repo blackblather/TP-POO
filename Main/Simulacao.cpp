@@ -124,39 +124,54 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 	int valoraux = -1;
 	if (comandoPart.size() == 5 && comandoPart[0] == "cria1") 
 	{
+		bool isnum = is_number(comandoPart[2]);
+		bool isnumaux = is_number(comandoPart[3]);
+		bool isnumaux2 = is_number(comandoPart[4]);
+		if (isnum && isnumaux && isnumaux2) {
 			bool exists = this->mapa->Ninho_exists(comandoPart[2]);
 			valor = stoi(comandoPart[3], nullptr, 10);
 			valoraux = stoi(comandoPart[4], nullptr, 10);
-			if (valor >= 0 && valor <= limiteMapa && valoraux >= 0 && valoraux <= limiteMapa && exists)
+			if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa] && exists)
 			{
 				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done!
 				if (comandoPart[1] == "C" || comandoPart[1] == "V" || comandoPart[1] == "A" || comandoPart[1] == "E" || comandoPart[1] == "S")
 					return true;
 			}
+		}
 	}
 	else if (comandoPart.size() == 4 && comandoPart[0] == "criaf")
 	{
+		bool isnum = is_number(comandoPart[3]);
+		bool isnumaux = is_number(comandoPart[1]);
+		if (isnum && isnumaux) {
 			bool exists = this->mapa->Ninho_exists(comandoPart[3]);
 			valor = stoi(comandoPart[1], nullptr, 10);
-			if (valor > 0 && valor < (limiteMapa * limiteMapa) && exists)
+			if (valor > 0 && valor < (configsIniciais[limiteMapa] * configsIniciais[limiteMapa]) && exists)
 			{
 				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done! Semelhante ao anterior..
 				if (comandoPart[2] == "C" || comandoPart[2] == "V" || comandoPart[2] == "A" || comandoPart[2] == "E" || comandoPart[2] == "S")
 					return true;
 			}
+		}
 	}
-	else if (comandoPart.size() == 4 && comandoPart[0] == "energiaformiga")
+	else if (comandoPart.size() == 4 && comandoPart[0] == "energformiga")
 	{
-		valor = stoi(comandoPart[1], nullptr, 10);
-		valoraux = stoi(comandoPart[2], nullptr, 10);
-		if (valor >= 0 && valor <= limiteMapa && valoraux >= 0 && valoraux <= limiteMapa)
-		{
-			if (stoi(comandoPart[3], nullptr, 10) >= 0) 
+		bool isnum = is_number(comandoPart[1]);
+		bool isnumaux = is_number(comandoPart[2]);
+		if (isnum && isnumaux) {
+			valor = stoi(comandoPart[1], nullptr, 10);
+			valoraux = stoi(comandoPart[2], nullptr, 10);
+			if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa])
 			{
-				bool isnum = is_number(comandoPart[3]);
-				if (isnum == 1)
+				bool isnumaux2 = is_number(comandoPart[3]);
+				if (isnumaux2)
+				if (stoi(comandoPart[3], nullptr, 10) >= 0)
 				{
-					return true;
+					bool isnum = is_number(comandoPart[3]);
+					if (isnum == 1)
+					{
+						return true;
+					}
 				}
 			}
 		}
@@ -165,11 +180,15 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 	{
 		if (comandoPart[0] != "energninho") 
 		{
-			valor = stoi(comandoPart[1], nullptr, 10);
-			valoraux = stoi(comandoPart[2], nullptr, 10);
-			if (valor >= 0 && valor <= limiteMapa && valoraux >= 0 && valoraux <= limiteMapa)
-			{
-				return true;
+			bool isnum = is_number(comandoPart[1]);
+			bool isnumaux = is_number(comandoPart[2]);
+			if (isnum && isnumaux) {
+				valor = stoi(comandoPart[1], nullptr, 10);
+				valoraux = stoi(comandoPart[2], nullptr, 10);
+				if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa])
+				{
+					return true;
+				}
 			}
 
 		}
@@ -192,11 +211,16 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 			bool ret = is_number(comandoPart[1]);
 			if (ret)
 			{
-				if (comandoPart[0] != "tempo")
+				if (comandoPart[0] != "tempo") {
 					exists = this->mapa->Ninho_exists(comandoPart[1]);
-				valor = stoi(comandoPart[1], nullptr, 10);
-				if (valor >= 0 && exists)
+					if(exists)
 					return true;
+				}
+				else {
+					valor = stoi(comandoPart[1], nullptr, 10);
+					if (valor >= 0)
+						return true;
+				}
 			}
 		}
 		else //para depois fazer a <guarda> <muda> e <apaga>
