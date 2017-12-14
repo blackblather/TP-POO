@@ -94,9 +94,12 @@ void Simulacao::ExecutaFicheiro(const string& fileName) {
 }
 
 bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
+	int valor = -1;
 	if (comandoPart.size() == 2)
 		if (comandoPart[0] != "executa") {
-			int valor = stoi(comandoPart[1], nullptr, 10);
+			bool ret = is_number(comandoPart[1]);
+			if (ret)
+				valor = stoi(comandoPart[1], nullptr, 10);
 			if ((comandoPart[0] == "defmundo" && valor >= 10) ||
 				((comandoPart[0] == "defen" || comandoPart[0] == "defvt" || comandoPart[0] == "defme" || comandoPart[0] == "defnm") && valor >= 1) ||
 				((comandoPart[0] == "defpc" || comandoPart[0] == "defmi") && valor >= 0 && valor <= 100))
@@ -105,6 +108,102 @@ bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 		else
 			return true;
 	else if (comandoPart.size() == 1 && comandoPart[0] == "inicio")
+		return true;
+	return false;
+}
+
+bool Simulacao::is_number(const string& s)
+{
+	string::const_iterator it = s.begin();
+	while (it != s.end() && isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
+}
+
+bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
+	int valor = -1;
+	int valoraux = -1;
+	if (comandoPart.size() == 5 && comandoPart[0] == "cria1") 
+	{
+			bool exists = this->mapa->Ninho_exists(comandoPart[2]);
+			valor = stoi(comandoPart[3], nullptr, 10);
+			valoraux = stoi(comandoPart[4], nullptr, 10);
+			if (valor >= 0 && valor <= limiteMapa && valoraux >= 0 && valoraux <= limiteMapa && exists)
+			{
+				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done!
+				if (comandoPart[1] == "C" || comandoPart[1] == "V" || comandoPart[1] == "A" || comandoPart[1] == "E" || comandoPart[1] == "S")
+					return true;
+			}
+	}
+	else if (comandoPart.size() == 4 && comandoPart[0] == "criaf")
+	{
+			bool exists = this->mapa->Ninho_exists(comandoPart[3]);
+			valor = stoi(comandoPart[1], nullptr, 10);
+			if (valor > 0 && valor < (limiteMapa * limiteMapa) && exists)
+			{
+				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done! Semelhante ao anterior..
+				if (comandoPart[2] == "C" || comandoPart[2] == "V" || comandoPart[2] == "A" || comandoPart[2] == "E" || comandoPart[2] == "S")
+					return true;
+			}
+	}
+	else if (comandoPart.size() == 4 && comandoPart[0] == "energiaformiga")
+	{
+		valor = stoi(comandoPart[1], nullptr, 10);
+		valoraux = stoi(comandoPart[2], nullptr, 10);
+		if (valor >= 0 && valor <= limiteMapa && valoraux >= 0 && valoraux <= limiteMapa)
+		{
+			if (stoi(comandoPart[3], nullptr, 10) >= 0) 
+			{
+				bool isnum = is_number(comandoPart[3]);
+				if (isnum == 1)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	else if (comandoPart.size() == 3)
+	{
+		if (comandoPart[0] != "energninho") 
+		{
+			valor = stoi(comandoPart[1], nullptr, 10);
+			valoraux = stoi(comandoPart[2], nullptr, 10);
+			if (valor >= 0 && valor <= limiteMapa && valoraux >= 0 && valoraux <= limiteMapa)
+			{
+				return true;
+			}
+
+		}
+		else 
+		{
+			bool exists = this->mapa->Ninho_exists(comandoPart[1]);
+			if (stoi(comandoPart[2], nullptr, 10) >= 0)
+			{
+				bool isnum = is_number(comandoPart[2]);
+				if (isnum == 1 && exists)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	else if (comandoPart.size() == 2)
+		if (comandoPart[0] == "tempo" || comandoPart[0] == "inseticida" || comandoPart[0] == "listaninho") {
+			bool exists;
+			bool ret = is_number(comandoPart[1]);
+			if (ret)
+			{
+				if (comandoPart[0] != "tempo")
+					exists = this->mapa->Ninho_exists(comandoPart[1]);
+				valor = stoi(comandoPart[1], nullptr, 10);
+				if (valor >= 0 && exists)
+					return true;
+			}
+		}
+		else //para depois fazer a <guarda> <muda> e <apaga>
+		{
+			return true;
+		}
+	else if (comandoPart.size() == 1 && comandoPart[0] == "sair" || comandoPart[0] == "listamundo" || comandoPart[0] == "tempo")
 		return true;
 	return false;
 }

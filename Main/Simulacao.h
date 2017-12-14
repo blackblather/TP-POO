@@ -28,6 +28,8 @@ public:
 	bool TodasAsConfigIniciasEstaoDefinidas();
 	void ExecutaFicheiro(const string& fileName);
 	bool ComandoEValido(const vector<string>& comandoPart);
+	bool is_number(const string& s);
+	bool SimComandoEValido(const vector<string>& comandoPart);
 	vector<string> Explode(const string& str, const char& del);
 	void PrintConfigsIniciais();
 	void ScanConfig();

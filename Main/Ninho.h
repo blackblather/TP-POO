@@ -9,6 +9,7 @@ class Ninho : Elemento
 	vector<Formiga> formigas;
 public:
 	Ninho(posXY pos);
+	int GetNinhoID();
 	~Ninho();
 };
 

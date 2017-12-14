@@ -50,6 +50,30 @@ void Mapa::DrawMap(const int& limite) {
 		cout << "X ";
 }
 
+bool Mapa::Ninho_exists(const string& s)
+{
+	vector<Ninho>::iterator it;
+	if (ninhos.begin() != ninhos.end())
+	{
+		for (auto it = ninhos.begin(); it != ninhos.end(); it++)
+		{
+			int aux = it->GetNinhoID();
+			if (stoi(s, nullptr, 10) == aux) 
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+	else 
+	{
+		return false;
+	}
+}
+
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
 	int qtdMigalhasIniciais = (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais / 100);
 	if (InicializaArrayMapa(limiteMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais))

@@ -10,6 +10,11 @@ Ninho::Ninho(posXY pos)
 	N_ninho++;
 }
 
+int Ninho::GetNinhoID() 
+{
+	return this->ID_ninho;
+}
+
 
 Ninho::~Ninho()
 {
