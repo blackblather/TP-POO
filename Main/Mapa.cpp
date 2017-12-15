@@ -22,29 +22,23 @@ void Mapa::PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais
 	PreencheMapaComMigalhasIniciais(limite, qtdMigalhasIniciais, percentDeMigalhasIniciais);
 }
 
-bool Mapa::InicializaArrayMapa(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais) {
-	try {
-		arrMapa = new char*[limite];
-		for (int i = 0; i < limite; i++)
-			arrMapa[i] = new char[limite];
-		PreencheMapaInicial(limite, qtdMigalhasIniciais, percentDeMigalhasIniciais);
-		return true;
-	}
-	catch(std::bad_alloc& ba) {
-		return false;
-	}
+void Mapa::InicializaArrayMapa(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais) {
+	arrMapa = new char*[limite];
+	for (int i = 0; i < limite; i++)
+		arrMapa[i] = new char[limite];
+	PreencheMapaInicial(limite, qtdMigalhasIniciais, percentDeMigalhasIniciais);
 }
 
 void Mapa::DrawMap(const int& limite) {
 	for (int i = 0; i < limite + 2; i++)
 		cout << "X ";
-	cout << "\n";
+	cout << "\r\n";
 	for (int x = 0; x < limite; x++)
 	{
 		cout << "X ";
 		for (int y = 0; y < limite; y++)
 			cout << arrMapa[x][y] << ' ';
-		cout << "X\n";
+		cout << "X\r\n";
 	}
 	for (int i = 0; i < limite + 2; i++)
 		cout << "X ";
@@ -52,6 +46,5 @@ void Mapa::DrawMap(const int& limite) {
 
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
 	int qtdMigalhasIniciais = (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais / 100);
-	if (InicializaArrayMapa(limiteMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais))
-		DrawMap(limiteMapa); //Esta função não é daqui, só está aqui por uma questão de testes.
+	InicializaArrayMapa(limiteMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais);
 }
