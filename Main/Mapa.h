@@ -16,5 +16,6 @@ class Mapa : public Ecra
 	void InicializaArrayMapa(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
 public:
 	void DrawMap(const int& limite);
+	bool Ninho_exists(const string& s);
 	Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais);
 };
