@@ -178,7 +178,7 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 	}
 	else if (comandoPart.size() == 3)
 	{
-		if (comandoPart[0] != "energninho") 
+		if (comandoPart[0] == "ninho" || comandoPart[0] == "migalha" || comandoPart[0] == "foca" || comandoPart[0] == "mata" || comandoPart[0] == "listaposicao")
 		{
 			bool isnum = is_number(comandoPart[1]);
 			bool isnumaux = is_number(comandoPart[2]);
@@ -192,7 +192,7 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 			}
 
 		}
-		else 
+		else if (comandoPart[0] == "energninho")
 		{
 			bool exists = this->mapa->Ninho_exists(comandoPart[1]);
 			if (stoi(comandoPart[2], nullptr, 10) >= 0)
@@ -223,7 +223,8 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 				}
 			}
 		}
-		else //para depois fazer a <guarda> <muda> e <apaga>
+		else if(comandoPart[0] == "guarda" || comandoPart[0] == "muda" || comandoPart[0] == "apaga")
+		//para depois fazer a <guarda> <muda> e <apaga>
 		{
 			return true;
 		}

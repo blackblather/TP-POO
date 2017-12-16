@@ -1,3 +1,2 @@
-﻿  Main.cpp
-c:\users\gusta\source\repos\tp-poo2\main\main.cpp(7): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Simulacao.cpp
   Main.vcxproj -> C:\Users\gusta\Source\Repos\TP-POO2\Debug\Main.exe
