@@ -205,7 +205,7 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 			}
 		}
 	}
-	else if (comandoPart.size() == 2)
+	else if (comandoPart.size() == 2) {
 		if (comandoPart[0] == "tempo" || comandoPart[0] == "inseticida" || comandoPart[0] == "listaninho") {
 			bool exists;
 			bool ret = is_number(comandoPart[1]);
@@ -213,8 +213,8 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 			{
 				if (comandoPart[0] != "tempo") {
 					exists = this->mapa->Ninho_exists(comandoPart[1]);
-					if(exists)
-					return true;
+					if (exists)
+						return true;
 				}
 				else {
 					valor = stoi(comandoPart[1], nullptr, 10);
@@ -223,11 +223,12 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 				}
 			}
 		}
-		else if(comandoPart[0] == "guarda" || comandoPart[0] == "muda" || comandoPart[0] == "apaga")
-		//para depois fazer a <guarda> <muda> e <apaga>
+		else if (comandoPart[0] == "guarda" || comandoPart[0] == "muda" || comandoPart[0] == "apaga")
+			//para depois fazer a <guarda> <muda> e <apaga>
 		{
 			return true;
 		}
+	}
 	else if (comandoPart.size() == 1 && comandoPart[0] == "sair" || comandoPart[0] == "listamundo" || comandoPart[0] == "tempo")
 		return true;
 	return false;
