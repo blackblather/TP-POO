@@ -10,12 +10,12 @@ Formiga::Formiga(posXY pos)
 	N_formiga++;
 }
 
-posXY Formiga::GetPosFormiga()
+posXY Formiga::GetPosFormiga() const
 {
 	return this->posElemento;
 }
 
-void Formiga::GetAntInfo() 
+void Formiga::GetAntInfo() const
 {
 	cout << "--Formiga: " << this->ID_formiga << endl;
 	cout << "---Energia: " << this->energia << endl;

@@ -68,7 +68,7 @@ bool Mapa::Ninho_exists(const string& s)
 	}
 }
 
-void Mapa::ListaElementos(int limiteMapa)
+void Mapa::ListaElementos(int limiteMapa) const
 {
 	posXY xy;
 	for (xy.x = 0; xy.x < limiteMapa; xy.x++)
@@ -96,7 +96,7 @@ void Mapa::ListaElementos(int limiteMapa)
 	}
 
 }
-void Mapa::ListaNinho(int ID_ninho)
+void Mapa::ListaNinho(int ID_ninho) const
 {
 	vector<Ninho>::iterator it;
 	if (ninhos.begin() != ninhos.end())
@@ -111,7 +111,7 @@ void Mapa::ListaNinho(int ID_ninho)
 		}
 	}
 }
-void Mapa::ListaPosicao(posXY xy, int limiteMapa)
+void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 {
 	if (xy.x > 0 && xy.x <= limiteMapa && xy.y > 0 && xy.y <= limiteMapa)
 	{

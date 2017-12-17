@@ -35,7 +35,7 @@ public:
 	void ScanConfig();
 	void SetConfigInicial(vector<string> comandoPart);
 	void InicializaMapa();
-	int GetLimiteMapa();
+	int GetLimiteMapa() const; 
 	Simulacao();
 	~Simulacao();
 };

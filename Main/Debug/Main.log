@@ -2,8 +2,6 @@
   Ninho.cpp
   Migalha.cpp
   Mapa.cpp
-  Formiga.cpp
-  Elemento.cpp
   Generating Code...
 c:\users\gusta\source\repos\tp-poo2\main\mapa.cpp(69): warning C4715: 'Mapa::Ninho_exists': not all control paths return a value
   Skipping... (no relevant changes detected)

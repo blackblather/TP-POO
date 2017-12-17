@@ -257,7 +257,7 @@ void Simulacao::InicializaMapa() {
 					configsIniciais[percentDeMigalhasIniciais]);
 }
 
-int Simulacao::GetLimiteMapa()
+int Simulacao::GetLimiteMapa() const
 {
 	return this->configsIniciais[limiteMapa];
 }

@@ -6,7 +6,7 @@ class Migalha : Elemento
 {
 public:
 	Migalha(posXY pos, const int& energiaMigalha);
-	posXY GetPosMigalha();
+	posXY GetPosMigalha() const;
 	~Migalha();
 };
 

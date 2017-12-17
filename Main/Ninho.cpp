@@ -10,17 +10,17 @@ Ninho::Ninho(posXY pos)
 	N_ninho++;
 }
 
-int Ninho::GetNinhoID() 
+int Ninho::GetNinhoID() const
 {
 	return this->ID_ninho;
 }
 
-posXY Ninho::GetPosNinhos()
+posXY Ninho::GetPosNinhos() const
 {
 	return this->posElemento;
 }
 
-void Ninho::InfoFormiga(posXY xy) 
+void Ninho::InfoFormiga(posXY xy) const 
 {
 	vector<Formiga>::iterator it;
 	if (formigas.begin() != formigas.end())
@@ -33,7 +33,7 @@ void Ninho::InfoFormiga(posXY xy)
 	}
 }
 
-void Ninho::NinhoInfo() 
+void Ninho::NinhoInfo() const
 {
 	cout << "Ninho ID: " << ID_ninho << endl;
 	cout << "-Posicao: " << posElemento.x << "," << posElemento.y << endl;
@@ -53,7 +53,7 @@ void Ninho::NinhoInfo()
 	}
 }
 
-void Ninho::NinhoInfoSimplex()
+void Ninho::NinhoInfoSimplex() const
 {
 	int N_formigas = 0;
 	cout << "Ninho ID: " << ID_ninho << endl;
