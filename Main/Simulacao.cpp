@@ -257,6 +257,11 @@ void Simulacao::InicializaMapa() {
 					configsIniciais[percentDeMigalhasIniciais]);
 }
 
+int Simulacao::GetLimiteMapa()
+{
+	return this->configsIniciais[limiteMapa];
+}
+
 //Construtor Simulação
 Simulacao::Simulacao()
 {

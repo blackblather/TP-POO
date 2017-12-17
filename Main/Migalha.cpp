@@ -8,6 +8,11 @@ Migalha::Migalha(posXY pos, const int& energiaMigalha)
 	energia = energiaMigalha;
 }
 
+posXY Migalha::GetPosMigalha()
+{
+	return this->posElemento;
+}
+
 
 Migalha::~Migalha()
 {

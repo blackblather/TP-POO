@@ -15,6 +15,65 @@ int Ninho::GetNinhoID()
 	return this->ID_ninho;
 }
 
+posXY Ninho::GetPosNinhos()
+{
+	return this->posElemento;
+}
+
+void Ninho::InfoFormiga(posXY xy) 
+{
+	vector<Formiga>::iterator it;
+	if (formigas.begin() != formigas.end())
+	{
+		for (auto it = formigas.begin(); it != formigas.end(); it++)
+		{
+			if (xy.x == posElemento.x && xy.y == posElemento.y)
+				it->GetAntInfo();
+		}
+	}
+}
+
+void Ninho::NinhoInfo() 
+{
+	cout << "Ninho ID: " << ID_ninho << endl;
+	cout << "-Posicao: " << posElemento.x << "," << posElemento.y << endl;
+	cout << "-Energia: " << energia << endl;
+	cout << "-Formigas afiliadas ao ninho:" << endl;
+	vector<Formiga>::iterator it;
+	if (formigas.begin() != formigas.end())
+	{
+		for (auto it = formigas.begin(); it != formigas.end(); it++)
+		{
+			it->GetAntInfo();
+		}
+	}
+	else
+	{
+		cout << "--Nao foram encontradas formigas afiliadas a este ninho!" << endl;
+	}
+}
+
+void Ninho::NinhoInfoSimplex()
+{
+	int N_formigas = 0;
+	cout << "Ninho ID: " << ID_ninho << endl;
+	cout << "-Posicao: " << posElemento.x << "," << posElemento.y << endl;
+	cout << "-Energia: " << energia << endl;
+	vector<Formiga>::iterator it;
+	if (formigas.begin() != formigas.end())
+	{
+		for (auto it = formigas.begin(); it != formigas.end(); it++)
+		{
+			N_formigas++;
+		}
+	}
+	else
+	{
+		cout << "--Nao foram encontradas formigas afiliadas a este ninho!" << endl;
+	}
+	cout << "-Formigas afiliadas ao ninho:" << N_formigas << endl;
+}
+
 
 Ninho::~Ninho()
 {

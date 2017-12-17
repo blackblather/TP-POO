@@ -9,3 +9,16 @@ Formiga::Formiga(posXY pos)
 	ID_formiga = N_formiga;
 	N_formiga++;
 }
+
+posXY Formiga::GetPosFormiga()
+{
+	return this->posElemento;
+}
+
+void Formiga::GetAntInfo() 
+{
+	cout << "--Formiga: " << this->ID_formiga << endl;
+	cout << "---Energia: " << this->energia << endl;
+	cout << "---Posicao: " << posElemento.x << "," << posElemento.y << endl;
+	cout << "---Esta no ninho?: " << this->is_in_nest << endl;
+}
