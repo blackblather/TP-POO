@@ -13,8 +13,8 @@ public:
 	int GetNinhoID() const;
 	posXY GetPosNinhos() const;
 	void InfoFormiga(posXY xy) const;
-	void NinhoInfo() const;
-	void NinhoInfoSimplex() const;
+	void NinhoInfoDetailed() const;
+	void NinhoInfoSimple() const;
 	~Ninho();
 };
 

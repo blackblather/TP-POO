@@ -88,7 +88,7 @@ void Mapa::ListaElementos(int limiteMapa) const
 					for (auto it = ninhos.begin(); it != ninhos.end(); it++)
 					{
 						if (it->GetPosNinhos().x == xy.x && it->GetPosNinhos().y == xy.y)
-							it->NinhoInfoSimplex();
+							it->NinhoInfoSimple();
 					}
 				}
 			}
@@ -106,7 +106,7 @@ void Mapa::ListaNinho(int ID_ninho) const
 			int aux = it->GetNinhoID();
 			if (ID_ninho == aux)
 			{
-				it->NinhoInfo();
+				it->NinhoInfoDetailed();
 			}
 		}
 	}
@@ -141,7 +141,7 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 				for (auto it = ninhos.begin(); it != ninhos.end(); it++)
 				{
 					if (it->GetPosNinhos().x == xy.x && it->GetPosNinhos().y == xy.y)
-						it->NinhoInfo();
+						it->NinhoInfoDetailed();
 				}
 			}
 		}

@@ -33,7 +33,7 @@ void Ninho::InfoFormiga(posXY xy) const
 	}
 }
 
-void Ninho::NinhoInfo() const
+void Ninho::NinhoInfoDetailed() const
 {
 	cout << "Ninho ID: " << ID_ninho << endl;
 	cout << "-Posicao: " << posElemento.x << "," << posElemento.y << endl;
@@ -53,7 +53,7 @@ void Ninho::NinhoInfo() const
 	}
 }
 
-void Ninho::NinhoInfoSimplex() const
+void Ninho::NinhoInfoSimple() const
 {
 	int N_formigas = 0;
 	cout << "Ninho ID: " << ID_ninho << endl;
