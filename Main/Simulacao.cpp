@@ -114,6 +114,128 @@ bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
 	}
 }
 
+bool Simulacao::is_number(const string& s)
+{
+	string::const_iterator it = s.begin();
+	while (it != s.end() && isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
+}
+
+bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
+	int valor = -1;
+	int valoraux = -1;
+	if (comandoPart.size() == 5 && comandoPart[0] == "cria1") 
+	{
+		bool isnum = is_number(comandoPart[2]);
+		bool isnumaux = is_number(comandoPart[3]);
+		bool isnumaux2 = is_number(comandoPart[4]);
+		if (isnum && isnumaux && isnumaux2) {
+			bool exists = this->mapa->Ninho_exists(comandoPart[2]);
+			valor = stoi(comandoPart[3], nullptr, 10);
+			valoraux = stoi(comandoPart[4], nullptr, 10);
+			if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa] && exists)
+			{
+				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done!
+				if (comandoPart[1] == "C" || comandoPart[1] == "V" || comandoPart[1] == "A" || comandoPart[1] == "E" || comandoPart[1] == "S")
+					return true;
+			}
+		}
+	}
+	else if (comandoPart.size() == 4 && comandoPart[0] == "criaf")
+	{
+		bool isnum = is_number(comandoPart[3]);
+		bool isnumaux = is_number(comandoPart[1]);
+		if (isnum && isnumaux) {
+			bool exists = this->mapa->Ninho_exists(comandoPart[3]);
+			valor = stoi(comandoPart[1], nullptr, 10);
+			if (valor > 0 && valor < (configsIniciais[limiteMapa] * configsIniciais[limiteMapa]) && exists)
+			{
+				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done! Semelhante ao anterior..
+				if (comandoPart[2] == "C" || comandoPart[2] == "V" || comandoPart[2] == "A" || comandoPart[2] == "E" || comandoPart[2] == "S")
+					return true;
+			}
+		}
+	}
+	else if (comandoPart.size() == 4 && comandoPart[0] == "energformiga")
+	{
+		bool isnum = is_number(comandoPart[1]);
+		bool isnumaux = is_number(comandoPart[2]);
+		if (isnum && isnumaux) {
+			valor = stoi(comandoPart[1], nullptr, 10);
+			valoraux = stoi(comandoPart[2], nullptr, 10);
+			if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa])
+			{
+				bool isnumaux2 = is_number(comandoPart[3]);
+				if (isnumaux2)
+				if (stoi(comandoPart[3], nullptr, 10) >= 0)
+				{
+					bool isnum = is_number(comandoPart[3]);
+					if (isnum == 1)
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+	else if (comandoPart.size() == 3)
+	{
+		if (comandoPart[0] == "ninho" || comandoPart[0] == "migalha" || comandoPart[0] == "foca" || comandoPart[0] == "mata" || comandoPart[0] == "listaposicao")
+		{
+			bool isnum = is_number(comandoPart[1]);
+			bool isnumaux = is_number(comandoPart[2]);
+			if (isnum && isnumaux) {
+				valor = stoi(comandoPart[1], nullptr, 10);
+				valoraux = stoi(comandoPart[2], nullptr, 10);
+				if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa])
+				{
+					return true;
+				}
+			}
+
+		}
+		else if (comandoPart[0] == "energninho")
+		{
+			bool exists = this->mapa->Ninho_exists(comandoPart[1]);
+			if (stoi(comandoPart[2], nullptr, 10) >= 0)
+			{
+				bool isnum = is_number(comandoPart[2]);
+				if (isnum == 1 && exists)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	else if (comandoPart.size() == 2) {
+		if (comandoPart[0] == "tempo" || comandoPart[0] == "inseticida" || comandoPart[0] == "listaninho") {
+			bool exists;
+			bool ret = is_number(comandoPart[1]);
+			if (ret)
+			{
+				if (comandoPart[0] != "tempo") {
+					exists = this->mapa->Ninho_exists(comandoPart[1]);
+					if (exists)
+						return true;
+				}
+				else {
+					valor = stoi(comandoPart[1], nullptr, 10);
+					if (valor >= 0)
+						return true;
+				}
+			}
+		}
+		else if (comandoPart[0] == "guarda" || comandoPart[0] == "muda" || comandoPart[0] == "apaga")
+			//para depois fazer a <guarda> <muda> e <apaga>
+		{
+			return true;
+		}
+	}
+	else if (comandoPart.size() == 1 && comandoPart[0] == "sair" || comandoPart[0] == "listamundo" || comandoPart[0] == "tempo")
+		return true;
+	return false;
+}
+
 void Simulacao::SetConfigInicial(vector<string> comandoPart) {
 	configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
 
@@ -156,6 +278,11 @@ void Simulacao::PrintSimulacaoNoEstadoAtual() {
 	posAux.x = 0;
 	posAux.y = configsIniciais[limiteMapa] + 2;
 	Ecra::gotoxy(posAux);
+}
+
+int Simulacao::GetLimiteMapa() const
+{
+	return this->configsIniciais[limiteMapa];
 }
 
 //Construtor Simulação

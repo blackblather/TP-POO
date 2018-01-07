@@ -9,6 +9,10 @@ class Ninho : Elemento
 	vector<Formiga> formigas;
 public:
 	Ninho(posXY pos);
-	~Ninho();
+	int GetNinhoID() const;
+	posXY GetPosNinhos() const;
+	void InfoFormiga(posXY xy) const;
+	void NinhoInfoDetailed() const;
+	void NinhoInfoSimple() const;
 };
 
