@@ -25,8 +25,8 @@ void Simulacao::PrintValorPropInicial(const string& prop)
 	if (prop == "defmundo" || prop == "defen" || prop == "defpc" || prop == "defvt" || prop == "defmi" || prop == "defme" || prop == "defnm")
 		if (configsIniciais[PropNameToArrayIndex(prop)] != -1)
 			propVal = to_string(configsIniciais[PropNameToArrayIndex(prop)]);
-	
-	Ecra::PrintTextoColorido(propVal, (propVal == "indefinido"?"vermelho":"verde") , "default");
+
+	Ecra::PrintTextoColorido(propVal, (propVal == "indefinido" ? "vermelho" : "verde"), "default");
 }
 
 //Imprime o ecrã das configs iniciais
@@ -40,7 +40,7 @@ void Simulacao::PrintConfigsIniciais() {
 	cout << " -> defmi        "; PrintValorPropInicial("defmi"); cout << "\r\n";
 	cout << " -> defme        "; PrintValorPropInicial("defme"); cout << "\r\n";
 	cout << " -> defnm        "; PrintValorPropInicial("defnm"); cout << "\r\n";
-	
+
 	cout << " -> executa      <nomeficheiro>\r\n";
 	cout << " -> inicio\r\n\n";
 }
@@ -94,31 +94,32 @@ void Simulacao::ExecutaFicheiro(const string& fileName) {
 }
 
 bool Simulacao::ComandoEValido(const vector<string>& comandoPart) {
-	if (comandoPart.size() == 2) {
-		if (comandoPart[0] != "executa") {
-			int valor = stoi(comandoPart[1], nullptr, 10);
-			if ((comandoPart[0] == "defmundo" && valor >= 10) ||
-				((comandoPart[0] == "defen" || comandoPart[0] == "defvt" || comandoPart[0] == "defme" || comandoPart[0] == "defnm") && valor >= 1) ||
-				((comandoPart[0] == "defpc" || comandoPart[0] == "defmi") && valor >= 0 && valor <= 100))
+	try {
+		if (comandoPart.size() == 2)
+			if (comandoPart[0] != "executa") {
+				int valor = stoi(comandoPart[1], nullptr, 10);
+				if ((comandoPart[0] == "defmundo" && valor >= 10) ||
+					((comandoPart[0] == "defen" || comandoPart[0] == "defvt" || comandoPart[0] == "defme" || comandoPart[0] == "defnm") && valor >= 1) ||
+					((comandoPart[0] == "defpc" || comandoPart[0] == "defmi") && valor >= 0 && valor <= 100))
+					return true;
+			}
+			else
 				return true;
-		}
-		else
-			return true; //verificar aqui se o nome do ficheiro é válido
+		else if (comandoPart.size() == 1 && comandoPart[0] == "inicio")
+			return true;
+		return false;
 	}
-	else if (comandoPart.size() == 1 && comandoPart[0] == "inicia")
-		return true;
-
-	return false;
+	catch (...) { //(...) Representa todas as excepções.
+		return false;
+	}
 }
 
 void Simulacao::SetConfigInicial(vector<string> comandoPart) {
 	configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
+
 }
 
-/*
- * Verifica se todas as configs iniciais estão definidas.
- * Usado para verificar se pode começar a simulação.
- */
+//Verifica se todas as configs iniciais estão definidas. Usado para verificar se pode começar a simulação.
 bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 	//Assume que as que não estão definidas, têm valor: -1
 	int totalConfigsSet = 0;
@@ -130,9 +131,31 @@ bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 	return false;
 }
 
-//TODO: Começa simulação
-void Simulacao::Start() {
-	cout << "COMECOU A SIMULACAO";
+void Simulacao::InicializaMapa() {
+	mapa = new Mapa(configsIniciais[limiteMapa],
+		configsIniciais[energiaNovasMigalhas],
+		configsIniciais[percentDeMigalhasIniciais]);
+}
+
+void Simulacao::PrintStatsAt(posXY posicaoInicial) {
+	Ecra::gotoxy(posicaoInicial);
+	cout << "Dimensoes: " << configsIniciais[limiteMapa] << " x " << configsIniciais[limiteMapa];
+}
+
+void Simulacao::PrintSimulacaoNoEstadoAtual() {
+	//Vars auxiliares
+	posXY posAux;
+	//Desenha mapa
+	(*mapa).DrawMap(configsIniciais[limiteMapa]);
+	//Define as coords para escrever as stats
+	posAux.x = 3 * configsIniciais[limiteMapa];
+	posAux.y = 0;
+	//Imprime stats
+	PrintStatsAt(posAux);
+	//Mete o cursor abaixo do mapa (com uma linha de espaço)
+	posAux.x = 0;
+	posAux.y = configsIniciais[limiteMapa] + 2;
+	Ecra::gotoxy(posAux);
 }
 
 //Construtor Simulação
@@ -143,7 +166,6 @@ Simulacao::Simulacao()
 	configsIniciais[energiaInitNinhos] = -1;			// defen <energiaInitNinhos>
 	configsIniciais[energiaNinhoParaFormiga] = 1;		// defvt <energiaNinhoParaFormiga>
 	configsIniciais[energiaNovasMigalhas] = -1;			// defme <energiaNovasMigalhas>
-	//configsIniciais[qtdMigalhasIniciais] = -1;			/*AUX -> (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais/100)*/
 	configsIniciais[maxMigalhasPorIteracao] = -1;		// defnm <maxMigalhas>
 	configsIniciais[percentEnergiaNovaFormiga] = -1;	// defpc <percentEnergiaNovaFormiga>
 	configsIniciais[percentDeMigalhasIniciais] = -1;	// defmi <percentDeMigalhasIniciais>

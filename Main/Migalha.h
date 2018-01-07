@@ -1,10 +1,11 @@
 #pragma once
 #include "Elemento.h"
+#define crumbSymbol 'm'
+
 class Migalha : Elemento
 {
-	//TODO
 public:
-	Migalha();
+	Migalha(posXY pos, const int& energiaMigalha);
 	~Migalha();
 };
 

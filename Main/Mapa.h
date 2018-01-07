@@ -1,35 +1,20 @@
 #pragma once
 #include "Ecra.h"
-#include "Formiga.h"
-#include "Migalha.h"
 #include "Ninho.h"
+#include "Migalha.h"
 
-class Mapa : public Ecra
+
+class Mapa : Ecra
 {
-
+	char** arrMapa;
+	vector<Migalha> migalhas;
+	vector<Ninho> ninhos;
+	vector<Formiga> formigas;
+	void PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
+	void PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
+	//void PreencheMapaComFormigas();
+	void InicializaArrayMapa(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
 public:
-	/*Pensar se vale a pena usar este código, ou gerar um array e desenhar o mapa a partir desse array*/
-	/*static void DrawMap(int limite = 10) {
-		for (int i = 0; i < limite + 2; i++)
-			cout << "X ";
-		cout << "\n";
-		for (int l = 0; l < limite; l++)
-		{
-			cout << "X ";
-			for (int h = 0; h < limite; h++)
-			{
-				if (rand() % (100 + 1) < 50)
-					
-					cout << "  ";
-				else
-					cout << "O ";
-			}
-			cout << "X\n";
-		}
-
-		for (int i = 0; i < limite + 2; i++)
-			cout << "X ";
-	}*/
-	Mapa();
+	void DrawMap(const int& limite);
+	Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais);
 };
-

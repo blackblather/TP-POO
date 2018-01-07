@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Migalha.h"
 
-//TODO
-
-Migalha::Migalha()
+Migalha::Migalha(posXY pos, const int& energiaMigalha)
 {
+	simbolo = crumbSymbol;
+	posElemento = pos;
+	energia = energiaMigalha;
 }
 
 
