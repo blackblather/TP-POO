@@ -87,7 +87,7 @@ void Mapa::ListaElementos(int limiteMapa) const
 				{
 					for (auto it = ninhos.begin(); it != ninhos.end(); it++)
 					{
-						if (it->GetPosNinhos().x == xy.x && it->GetPosNinhos().y == xy.y)
+						if (it->GetPosNinho().x == xy.x && it->GetPosNinho().y == xy.y)
 							it->NinhoInfoSimple();
 					}
 				}
@@ -140,7 +140,7 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 			{
 				for (auto it = ninhos.begin(); it != ninhos.end(); it++)
 				{
-					if (it->GetPosNinhos().x == xy.x && it->GetPosNinhos().y == xy.y)
+					if (it->GetPosNinho().x == xy.x && it->GetPosNinho().y == xy.y)
 						it->NinhoInfoDetailed();
 				}
 			}
@@ -149,6 +149,19 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 	
 }
 
+bool Mapa::PosEstaLivre(posXY pos) {
+	if (arrMapa[pos.x][pos.y] == ' ')
+		return true;
+	return false;
+}
+
+void Mapa::CriaNinho(Ninho ninho) {
+	posXY posNinho = ninho.GetPosNinho();
+	if (PosEstaLivre(posNinho)) {
+		ninhos.push_back(ninho);
+		arrMapa[posNinho.x][posNinho.y] = ninho.simbolo;
+	}
+}
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
 	int qtdMigalhasIniciais = (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais / 100);
 	InicializaArrayMapa(limiteMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais);

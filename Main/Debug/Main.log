@@ -1,10 +1,6 @@
 ﻿  Simulacao.cpp
-  Ninho.cpp
-  Mapa.cpp
   Main.cpp
 c:\users\joaom\google drive\licenciatura (2016-xxxx)\2017 - 2018\semestre 1\poo\tp\main\main.cpp(7): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\joaom\google drive\licenciatura (2016-xxxx)\2017 - 2018\semestre 1\poo\tp\main\main.cpp(32): warning C4101: 'ba': unreferenced local variable
   Generating Code...
-c:\users\joaom\google drive\licenciatura (2016-xxxx)\2017 - 2018\semestre 1\poo\tp\main\mapa.cpp(69): warning C4715: 'Mapa::Ninho_exists': not all control paths return a value
-  LINK : C:\Users\joaom\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.exe not found or not built by the last incremental link; performing full link
   Main.vcxproj -> C:\Users\joaom\Google Drive\Licenciatura (2016-xxxx)\2017 - 2018\Semestre 1\POO\TP\Debug\Main.exe

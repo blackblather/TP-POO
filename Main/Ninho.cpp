@@ -15,7 +15,7 @@ int Ninho::GetNinhoID() const
 	return this->ID_ninho;
 }
 
-posXY Ninho::GetPosNinhos() const
+posXY Ninho::GetPosNinho() const
 {
 	return this->posElemento;
 }

@@ -38,6 +38,7 @@ public:
 	void InicializaMapa();
 	void PrintStatsAt(posXY posicaoInicial);
 	void PrintSimulacaoNoEstadoAtual();
+	void ExecutaComando(vector<string> comandoPart);
 	/*Construtor/Destrutor*/
 	int GetLimiteMapa() const; 
 	Simulacao();

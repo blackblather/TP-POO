@@ -180,19 +180,15 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 	}
 	else if (comandoPart.size() == 3)
 	{
-		if (comandoPart[0] == "ninho" || comandoPart[0] == "migalha" || comandoPart[0] == "foca" || comandoPart[0] == "mata" || comandoPart[0] == "listaposicao")
-		{
-			bool isnum = is_number(comandoPart[1]);
-			bool isnumaux = is_number(comandoPart[2]);
-			if (isnum && isnumaux) {
+		if (comandoPart[0] == "ninho" || comandoPart[0] == "migalha" || comandoPart[0] == "foca" ||
+			comandoPart[0] == "mata"  || comandoPart[0] == "listaposicao") {
+			if (is_number(comandoPart[1]) && is_number(comandoPart[2])) {
 				valor = stoi(comandoPart[1], nullptr, 10);
 				valoraux = stoi(comandoPart[2], nullptr, 10);
-				if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa])
-				{
+				if (valor >= 0 && valor <= configsIniciais[limiteMapa] &&
+					valoraux >= 0 && valoraux <= configsIniciais[limiteMapa])
 					return true;
-				}
 			}
-
 		}
 		else if (comandoPart[0] == "energninho")
 		{
@@ -278,6 +274,16 @@ void Simulacao::PrintSimulacaoNoEstadoAtual() {
 	posAux.x = 0;
 	posAux.y = configsIniciais[limiteMapa] + 2;
 	Ecra::gotoxy(posAux);
+}
+
+void Simulacao::ExecutaComando(vector<string> comandoPart) {
+	if (comandoPart[0] == "ninho") {
+		posXY pos;
+		pos.x = stoi(comandoPart[1]);
+		pos.y = stoi(comandoPart[2]);
+		Ninho ninhoTmp = Ninho(pos);
+		mapa->CriaNinho(ninhoTmp);
+	}
 }
 
 int Simulacao::GetLimiteMapa() const

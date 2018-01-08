@@ -2,7 +2,7 @@
 #include "Elemento.h"
 #include "Formiga.h"
 #define nestSymbol 'N'
-class Ninho : Elemento
+class Ninho : public Elemento
 {
 	static int N_ninho;
 	int ID_ninho;
@@ -10,7 +10,7 @@ class Ninho : Elemento
 public:
 	Ninho(posXY pos);
 	int GetNinhoID() const;
-	posXY GetPosNinhos() const;
+	posXY GetPosNinho() const;
 	void InfoFormiga(posXY xy) const;
 	void NinhoInfoDetailed() const;
 	void NinhoInfoSimple() const;

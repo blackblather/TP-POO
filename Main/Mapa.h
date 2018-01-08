@@ -19,5 +19,7 @@ public:
 	void ListaElementos(int limiteMapa) const;
 	void ListaNinho(int ID_ninho) const;
 	void ListaPosicao(posXY xy, int limiteMapa) const;
+	bool PosEstaLivre(posXY pos);
+	void CriaNinho(Ninho ninho);
 	Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais);
 };
