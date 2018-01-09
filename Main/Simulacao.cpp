@@ -135,8 +135,8 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 			valoraux = stoi(comandoPart[4], nullptr, 10);
 			if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa] && exists)
 			{
-				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done!
-				if (comandoPart[1] == "C" || comandoPart[1] == "V" || comandoPart[1] == "A" || comandoPart[1] == "E" || comandoPart[1] == "S")
+				if (comandoPart[1] == "C" || comandoPart[1] == "V" || comandoPart[1] == "A" || comandoPart[1] == "E" || comandoPart[1] == "S" ||
+					comandoPart[1] == "c" || comandoPart[1] == "v" || comandoPart[1] == "a" || comandoPart[1] == "e" || comandoPart[1] == "s")
 					return true;
 			}
 		}
@@ -148,10 +148,11 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 		if (isnum && isnumaux) {
 			bool exists = this->mapa->Ninho_exists(comandoPart[3]);
 			valor = stoi(comandoPart[1], nullptr, 10);
-			if (valor > 0 && valor < (configsIniciais[limiteMapa] * configsIniciais[limiteMapa]) && exists)
+			if (exists && valor > 0 && valor < (configsIniciais[limiteMapa] * configsIniciais[limiteMapa]))
+				//VER ESTE IF COMO DEVE SER (TER EM CONTA AS POSICOES OCUPADAS)
 			{
-				//Verificar se o ninho existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Done! Semelhante ao anterior..
-				if (comandoPart[2] == "C" || comandoPart[2] == "V" || comandoPart[2] == "A" || comandoPart[2] == "E" || comandoPart[2] == "S")
+				if (comandoPart[2] == "C" || comandoPart[2] == "V" || comandoPart[2] == "A" || comandoPart[2] == "E" || comandoPart[2] == "S" ||
+					comandoPart[2] == "c" || comandoPart[2] == "v" || comandoPart[2] == "a" || comandoPart[2] == "e" || comandoPart[2] == "s")
 					return true;
 			}
 		}
@@ -278,11 +279,12 @@ void Simulacao::PrintSimulacaoNoEstadoAtual() {
 
 void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	if (comandoPart[0] == "ninho") {
-		posXY pos;
-		pos.x = stoi(comandoPart[1]);
-		pos.y = stoi(comandoPart[2]);
+		posXY pos{ stoi(comandoPart[1]) ,stoi(comandoPart[2]) };
 		Ninho ninhoTmp = Ninho(pos);
 		mapa->CriaNinho(ninhoTmp);
+	}
+	else if (comandoPart[0] == "criaf") {
+		mapa->CriaF(stoi(comandoPart[1]), comandoPart[2].at(0), stoi(comandoPart[3]));
 	}
 }
 

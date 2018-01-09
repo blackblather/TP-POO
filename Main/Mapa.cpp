@@ -47,25 +47,10 @@ void Mapa::DrawMap(const int& limite) {
 bool Mapa::Ninho_exists(const string& s)
 {
 	vector<Ninho>::iterator it;
-	if (ninhos.begin() != ninhos.end())
-	{
-		for (auto it = ninhos.begin(); it != ninhos.end(); it++)
-		{
-			int aux = it->GetNinhoID();
-			if (stoi(s, nullptr, 10) == aux) 
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
-	else 
-	{
-		return false;
-	}
+	for (auto it = ninhos.begin(); it != ninhos.end(); it++)
+		if (stoi(s, nullptr, 10) == it->GetNinhoID())
+			return true;
+	return false;
 }
 
 void Mapa::ListaElementos(int limiteMapa) const
@@ -120,8 +105,8 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 		{
 			cout << "Migalha!" << endl; 
 		}
-		else if (arrMapa[xy.x][xy.y] == antSymbol) 
-		{ 
+		else if (arrMapa[xy.x][xy.y] == 'C' || arrMapa[xy.x][xy.y] == 'V' || arrMapa[xy.x][xy.y] == 'A' || arrMapa[xy.x][xy.y] == 'E' || arrMapa[xy.x][xy.y] == 'S' ||
+				arrMapa[xy.x][xy.y] == 'c' || arrMapa[xy.x][xy.y] == 'v' || arrMapa[xy.x][xy.y] == 'a' || arrMapa[xy.x][xy.y] == 'e' || arrMapa[xy.x][xy.y] == 's') { 
 			cout << "Formiga!" << endl; 
 			vector<Ninho>::iterator it;
 			if (ninhos.begin() != ninhos.end())
@@ -155,6 +140,14 @@ bool Mapa::PosEstaLivre(posXY pos) {
 	return false;
 }
 
+Ninho* Mapa::GetNinhoById(int id) {
+	vector<Ninho>::iterator it;
+	for (auto it = ninhos.begin(); it != ninhos.end(); it++)
+		if(it->GetNinhoID() == id)
+			return &(*it);
+	return nullptr;
+}
+
 void Mapa::CriaNinho(Ninho ninho) {
 	posXY posNinho = ninho.GetPosNinho();
 	if (PosEstaLivre(posNinho)) {
@@ -162,7 +155,25 @@ void Mapa::CriaNinho(Ninho ninho) {
 		arrMapa[posNinho.x][posNinho.y] = ninho.simbolo;
 	}
 }
+
+bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
+	posXY posFormiga { posX, posY };
+	Ninho* ninho = GetNinhoById(ID_ninho);
+	if (PosEstaLivre(posFormiga)) {
+		Formiga formigaAux = Formiga(posFormiga, tipo, ninho);
+		(*ninho).formigas.push_back(formigaAux);
+		arrMapa[posFormiga.x][posFormiga.y] = formigaAux.simbolo;
+		return true;
+	}
+	return false;
+}
+
+void Mapa::CriaF(int qtd, char tipo, int ID_ninho) {
+	for (int i = 0; i < qtd; (Cria1(tipo, ID_ninho, rand() % tamMapa, rand() % tamMapa) ? i++ : i=i));
+}
+
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
-	int qtdMigalhasIniciais = (int)((limiteMapa*limiteMapa) * percentDeMigalhasIniciais / 100);
-	InicializaArrayMapa(limiteMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais);
+	tamMapa = limiteMapa;
+	int qtdMigalhasIniciais = (int)((tamMapa*tamMapa) * percentDeMigalhasIniciais / 100);
+	InicializaArrayMapa(tamMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais);
 }

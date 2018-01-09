@@ -2,10 +2,11 @@
 #include "Formiga.h"
 
 int Formiga::N_formiga = 1;
-Formiga::Formiga(posXY pos)
+Formiga::Formiga(posXY pos, char type, Ninho* ninho)
 {
-	simbolo = antSymbol;
 	posElemento = pos;
+	simbolo = type;
+	motherLand = ninho;
 	ID_formiga = N_formiga;
 	N_formiga++;
 }

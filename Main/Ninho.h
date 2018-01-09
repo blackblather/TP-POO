@@ -6,8 +6,8 @@ class Ninho : public Elemento
 {
 	static int N_ninho;
 	int ID_ninho;
-	vector<Formiga> formigas;
 public:
+	vector<Formiga> formigas;
 	Ninho(posXY pos);
 	int GetNinhoID() const;
 	posXY GetPosNinho() const;
