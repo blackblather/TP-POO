@@ -286,6 +286,74 @@ void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	else if (comandoPart[0] == "criaf") {
 		mapa->CriaF(stoi(comandoPart[1]), comandoPart[2].at(0), stoi(comandoPart[3]));
 	}
+	else if (comandoPart[0] == "cria1")
+	{
+		
+	}
+	else if (comandoPart[0] == "migalha")
+	{
+		
+	}
+	else if (comandoPart[0] == "foca")
+	{
+		
+	}
+	else if (comandoPart[0] == "tempo")
+	{
+		if (comandoPart.size() == 2)
+		{
+
+		}
+		else {}
+	}
+	else if (comandoPart[0] == "energninho")
+	{
+		
+	}
+	else if (comandoPart[0] == "energformiga")
+	{
+		
+	}
+	else if (comandoPart[0] == "mata")
+	{
+		
+	}
+	else if (comandoPart[0] == "inseticida")
+	{
+		
+	}
+	else if (comandoPart[0] == "listamundo")
+	{
+		mapa->ListaElementos(configsIniciais[limiteMapa]);
+		
+	}
+	else if (comandoPart[0] == "listaninho")
+	{
+		mapa->ListaNinho(stoi(comandoPart[1], nullptr, 10));
+		
+	}
+	else if (comandoPart[0] == "listaposicao")
+	{
+		posXY xy;
+		xy.x = stoi(comandoPart[1], nullptr, 10);
+		xy.y = stoi(comandoPart[2], nullptr, 10);
+		mapa->ListaPosicao(xy, configsIniciais[limiteMapa]);
+	}
+	else if (comandoPart[0] == "guarda")
+	{
+
+	}
+	else if (comandoPart[0] == "muda")
+	{
+	}
+	else if (comandoPart[0] == "apaga")
+	{
+
+	}
+	else
+	{
+
+	}
 }
 
 int Simulacao::GetLimiteMapa() const

@@ -60,13 +60,13 @@ void Mapa::ListaElementos(int limiteMapa) const
 	{
 		for (xy.y = 0; xy.y < limiteMapa; xy.y++)
 		{
-			if (arrMapa[xy.x][xy.y] == crumbSymbol)
+			if (arrMapa[xy.y][xy.x] == crumbSymbol)
 			{
-				cout << "Migalha!" << endl;
+				cout << "Migalha!" << " (x=" << xy.x << ";y=" << xy.y << ")" << endl;
 			}
-			else if (arrMapa[xy.x][xy.y] == nestSymbol)
+			else if (arrMapa[xy.y][xy.x] == nestSymbol)
 			{
-				cout << "Ninho!" << endl;
+				cout << "Ninho!" << " (x=" << xy.x << ";y=" << xy.y << ")" << endl;
 				vector<Ninho>::iterator it;
 				if (ninhos.begin() != ninhos.end())
 				{
@@ -100,13 +100,13 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 {
 	if (xy.x > 0 && xy.x <= limiteMapa && xy.y > 0 && xy.y <= limiteMapa)
 	{
-		if (arrMapa[xy.x][xy.y] == ' ') cout << "Posicao vazia!" << endl;
-		else if (arrMapa[xy.x][xy.y] == crumbSymbol) 
+		if (arrMapa[xy.y][xy.x] == ' ') cout << "Posicao vazia!" << endl;
+		else if (arrMapa[xy.y][xy.x] == crumbSymbol) 
 		{
 			cout << "Migalha!" << endl; 
 		}
-		else if (arrMapa[xy.x][xy.y] == 'C' || arrMapa[xy.x][xy.y] == 'V' || arrMapa[xy.x][xy.y] == 'A' || arrMapa[xy.x][xy.y] == 'E' || arrMapa[xy.x][xy.y] == 'S' ||
-				arrMapa[xy.x][xy.y] == 'c' || arrMapa[xy.x][xy.y] == 'v' || arrMapa[xy.x][xy.y] == 'a' || arrMapa[xy.x][xy.y] == 'e' || arrMapa[xy.x][xy.y] == 's') { 
+		else if (arrMapa[xy.y][xy.x] == 'C' || arrMapa[xy.y][xy.x] == 'V' || arrMapa[xy.y][xy.x] == 'A' || arrMapa[xy.y][xy.x] == 'E' || arrMapa[xy.y][xy.x] == 'S' ||
+			arrMapa[xy.y][xy.x] == 'c' || arrMapa[xy.y][xy.x] == 'v' || arrMapa[xy.y][xy.x] == 'a' || arrMapa[xy.y][xy.x] == 'e' || arrMapa[xy.y][xy.x] == 's') {
 			cout << "Formiga!" << endl; 
 			vector<Ninho>::iterator it;
 			if (ninhos.begin() != ninhos.end())
@@ -117,7 +117,7 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 				}
 			}
 		}
-		else if (arrMapa[xy.x][xy.y] == nestSymbol) 
+		else if (arrMapa[xy.y][xy.x] == nestSymbol) 
 		{ 
 			cout << "Ninho!" << endl; 
 			vector<Ninho>::iterator it;
