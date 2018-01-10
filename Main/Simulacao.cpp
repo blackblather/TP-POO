@@ -339,9 +339,7 @@ void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	}
 	else if (comandoPart[0] == "listaposicao")
 	{
-		posXY xy;
-		xy.x = stoi(comandoPart[1], nullptr, 10);
-		xy.y = stoi(comandoPart[2], nullptr, 10);
+		posXY xy{ stoi(comandoPart[1]) ,stoi(comandoPart[2]) };
 		mapa->ListaPosicao(xy, configsIniciais[limiteMapa]);
 	}
 	else if (comandoPart[0] == "guarda")

@@ -135,7 +135,7 @@ void Mapa::ListaPosicao(posXY xy, int limiteMapa) const
 }
 
 bool Mapa::PosEstaLivre(posXY pos) {
-	if (arrMapa[pos.x][pos.y] == ' ')
+	if (arrMapa[pos.y][pos.x] == ' ')
 		return true;
 	return false;
 }
@@ -151,7 +151,7 @@ void Mapa::CriaNinho(Ninho ninho) {
 	posXY posNinho = ninho.GetPosNinho();
 	if (PosEstaLivre(posNinho)) {
 		ninhos.push_back(ninho);
-		arrMapa[posNinho.x][posNinho.y] = ninho.simbolo;
+		arrMapa[posNinho.y][posNinho.x] = ninho.simbolo;
 	}
 }
 
@@ -161,7 +161,7 @@ bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
 	if (PosEstaLivre(posFormiga) && ninho != nullptr) {
 		Formiga formigaAux = Formiga(posFormiga, tipo, ninho);
 		(*ninho).formigas.push_back(formigaAux);
-		arrMapa[posFormiga.x][posFormiga.y] = formigaAux.simbolo;
+		arrMapa[posFormiga.y][posFormiga.x] = formigaAux.simbolo;
 		return true;
 	}
 	return false;
