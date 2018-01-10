@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Formiga.h"
 
-bool Formiga::RegraFoge() { return false; }
-bool Formiga::RegraPersegue() { return false; }
-bool Formiga::RegraAssalta() { return false; }
-bool Formiga::RegraProtege() { return false; }
-bool Formiga::RegraProcuraMigalha() { return false; }
-bool Formiga::RegraComeMigalha() { return false; }
-bool Formiga::RegraVaiParaNinho() { return false; }
-bool Formiga::RegraPasseia() { return false; }
+bool Formiga::RegraFoge(char** arrMapa) { return false; }
+bool Formiga::RegraPersegue(char** arrMapa) { return false; }
+bool Formiga::RegraAssalta(char** arrMapa) { return false; }
+bool Formiga::RegraProtege(char** arrMapa) { return false; }
+bool Formiga::RegraProcuraMigalha(char** arrMapa) { return false; }
+bool Formiga::RegraComeMigalha(char** arrMapa) { return false; }
+bool Formiga::RegraVaiParaNinho(char** arrMapa) { return false; }
+bool Formiga::RegraPasseia(char** arrMapa) { return false; }
 
 void Formiga::ActionFormiga(char** arrMapa) {
 	if (is_in_nest) {
@@ -17,13 +17,13 @@ void Formiga::ActionFormiga(char** arrMapa) {
 	else {
 		//Executa regras de acordo com o tipo de formiga até uma função retornar "true"
 		if (simbolo == 'C' || simbolo == 'c')
-			RegraFoge() || RegraComeMigalha() || RegraProcuraMigalha() || RegraVaiParaNinho() || RegraPasseia();
+			RegraFoge(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraVaiParaNinho(arrMapa) || RegraPasseia(arrMapa);
 		if (simbolo == 'V' || simbolo == 'v')
-			RegraProtege() || RegraComeMigalha() || RegraProcuraMigalha() || RegraPasseia();
+			RegraProtege(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		if (simbolo == 'A' || simbolo == 'a')
-			RegraAssalta() || RegraPersegue() || RegraComeMigalha() || RegraProcuraMigalha() || RegraPasseia();
+			RegraAssalta(arrMapa) || RegraPersegue(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		if (simbolo == 'E' || simbolo == 'e')
-			RegraComeMigalha() || RegraPasseia();
+			RegraComeMigalha(arrMapa) || RegraPasseia(arrMapa);
 		//POR DEFINIR
 		/*if (simbolo == 'S' || simbolo == 's')
 		RegraFoge() || RegraComeMigalha() || RegraProcuraMigalha() || RegraVaiParaNinho() || RegraPasseia();*/

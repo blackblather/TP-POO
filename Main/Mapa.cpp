@@ -170,14 +170,18 @@ bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
 void Mapa::CriaF(int qtd, char tipo, int ID_ninho) {
 	for (int i = 0; i < qtd; (Cria1(tipo, ID_ninho, rand() % tamMapa, rand() % tamMapa) ? i++ : i=i));
 }
-//void ActionNinhos();
+void Mapa::ActionNinhos() {
+
+}
 void Mapa::ActionFormigas() {
 	/*Precorre os vectores "ninhos" e "formigas" sequencialmente*/
 	for (auto itN = ninhos.begin(); itN != ninhos.end(); itN++)
 		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++)
 			itF->ActionFormiga(arrMapa);
 }
-//void ActionMigalhas();
+void Mapa::ActionMigalhas() {
+
+}
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
 	tamMapa = limiteMapa;
 	int qtdMigalhasIniciais = (int)((tamMapa*tamMapa) * percentDeMigalhasIniciais / 100);

@@ -7,14 +7,14 @@ class Formiga : public Elemento
 	int ID_formiga;
 	bool is_in_nest;
 	Ninho* motherLand;
-	bool RegraFoge();			//#0
-	bool RegraPersegue();		//#1
-	bool RegraAssalta();		//#2
-	bool RegraProtege();		//#3
-	bool RegraProcuraMigalha();	//#4
-	bool RegraComeMigalha();	//#5
-	bool RegraVaiParaNinho();	//#6
-	bool RegraPasseia();		//#7
+	bool RegraFoge(char** arrMapa);			//#0
+	bool RegraPersegue(char** arrMapa);		//#1
+	bool RegraAssalta(char** arrMapa);		//#2
+	bool RegraProtege(char** arrMapa);		//#3
+	bool RegraProcuraMigalha(char** arrMapa);	//#4
+	bool RegraComeMigalha(char** arrMapa);	//#5
+	bool RegraVaiParaNinho(char** arrMapa);	//#6
+	bool RegraPasseia(char** arrMapa);		//#7
 
 public:
 	Formiga(posXY pos, char type, Ninho* ninho);
