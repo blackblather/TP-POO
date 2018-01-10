@@ -141,8 +141,7 @@ bool Mapa::PosEstaLivre(posXY pos) {
 }
 
 Ninho* Mapa::GetNinhoById(int id) {
-	vector<Ninho>::iterator it;
-	for (auto it = ninhos.begin(); it != ninhos.end(); it++)
+	for (vector<Ninho>::iterator it = ninhos.begin(); it != ninhos.end(); it++)
 		if(it->GetNinhoID() == id)
 			return &(*it);
 	return nullptr;
@@ -159,7 +158,7 @@ void Mapa::CriaNinho(Ninho ninho) {
 bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
 	posXY posFormiga { posX, posY };
 	Ninho* ninho = GetNinhoById(ID_ninho);
-	if (PosEstaLivre(posFormiga)) {
+	if (PosEstaLivre(posFormiga) && ninho != nullptr) {
 		Formiga formigaAux = Formiga(posFormiga, tipo, ninho);
 		(*ninho).formigas.push_back(formigaAux);
 		arrMapa[posFormiga.x][posFormiga.y] = formigaAux.simbolo;
@@ -171,7 +170,14 @@ bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
 void Mapa::CriaF(int qtd, char tipo, int ID_ninho) {
 	for (int i = 0; i < qtd; (Cria1(tipo, ID_ninho, rand() % tamMapa, rand() % tamMapa) ? i++ : i=i));
 }
-
+//void ActionNinhos();
+void Mapa::ActionFormigas() {
+	/*Precorre os vectores "ninhos" e "formigas" sequencialmente*/
+	for (auto itN = ninhos.begin(); itN != ninhos.end(); itN++)
+		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++)
+			itF->ActionFormiga(arrMapa);
+}
+//void ActionMigalhas();
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
 	tamMapa = limiteMapa;
 	int qtdMigalhasIniciais = (int)((tamMapa*tamMapa) * percentDeMigalhasIniciais / 100);
