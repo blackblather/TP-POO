@@ -20,6 +20,7 @@ class Simulacao
 	/*Funções privadas*/
 	int PropNameToArrayIndex(const string& str);
 	void PrintValorPropInicial(const string& prop);
+	void Tick(int qtd = 1);
 
 public:
 	/*Gets/Sets*/

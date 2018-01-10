@@ -277,6 +277,14 @@ void Simulacao::PrintSimulacaoNoEstadoAtual() {
 	Ecra::gotoxy(posAux);
 }
 
+void Simulacao::Tick(int qtd) {
+	for (int i = 0; i < qtd; i++) {
+		//mapa->ActionNinhos();
+		mapa->ActionFormigas();
+		//mapa->ActionMigalhas();
+	}
+}
+
 void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	if (comandoPart[0] == "ninho") {
 		posXY pos{ stoi(comandoPart[1]) ,stoi(comandoPart[2]) };
@@ -300,10 +308,7 @@ void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	}
 	else if (comandoPart[0] == "tempo")
 	{
-		if (comandoPart.size() == 2)
-		{
-
-		}
+		if (comandoPart.size() == 2) {}
 		else {}
 	}
 	else if (comandoPart[0] == "energninho")

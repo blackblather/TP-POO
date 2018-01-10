@@ -25,5 +25,8 @@ public:
 	void CriaNinho(Ninho ninho);
 	bool Cria1(char tipo, int ID_ninho, int posX, int posY);
 	void CriaF(int qtd, char tipo, int ID_ninho);
+	//void ActionNinhos();
+	void ActionFormigas();
+	//void ActionMigalhas();
 	Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais);
 };
