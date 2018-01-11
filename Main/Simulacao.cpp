@@ -277,7 +277,7 @@ void Simulacao::PrintSimulacaoNoEstadoAtual() {
 void Simulacao::Tick(int qtd) {
 	for (int i = 0; i < qtd; i++) {
 		//mapa->ActionNinhos();
-		//mapa->ActionFormigas();
+		mapa->ActionFormigas();
 		mapa->ActionMigalhas();
 	}
 }

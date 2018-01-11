@@ -162,7 +162,7 @@ void Mapa::DecayOldMigalhas() {
 	}
 }
 void Mapa::ActionMigalhas() {
-	//CriaNMigalhas();
+	CriaNMigalhas();
 	DecayOldMigalhas();
 }														//TODO
 //Construtor/Destrutor
