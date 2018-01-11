@@ -24,9 +24,11 @@ bool Formiga::RegraFoge(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
 			}
 		}
 	return false;
-}			//TODO
+}			//Should be done
 bool Formiga::RegraPersegue(char** arrMapa) { return false; }
-bool Formiga::RegraAssalta(char** arrMapa) { return false; }		//TODO
+bool Formiga::RegraAssalta(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
+	return false;
+}		//TODO
 bool Formiga::RegraProtege(char** arrMapa) { return false; }
 bool Formiga::RegraProcuraMigalha(char** arrMapa) { return false; }	//TODO
 bool Formiga::RegraComeMigalha(char** arrMapa) { return false; }
@@ -44,7 +46,7 @@ void Formiga::ActionFormiga(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos)
 		else if (simbolo == 'V' || simbolo == 'v')
 			RegraProtege(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'A' || simbolo == 'a')
-			RegraAssalta(arrMapa) || RegraPersegue(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
+			RegraAssalta(arrMapa, tamMapa, pNinhos) || RegraPersegue(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'E' || simbolo == 'e')
 			RegraComeMigalha(arrMapa) || RegraPasseia(arrMapa);
 		//POR DEFINIR
@@ -58,7 +60,34 @@ Formiga::Formiga(posXY pos, char type, Ninho* ninho)
 {
 	//Inicializa vars
 		posElemento = pos;
-		simbolo = type;
+		simbolo = toupper(type);
+		switch (simbolo) {
+			case 'C': {
+				raioVisao = 5;
+				raioMovimento = 3;
+				energia = 100;
+			} break;
+			case 'V': {
+				raioVisao = 7;
+				raioMovimento = 5;
+				energia = 150;
+			} break;
+			case 'A': {
+				raioVisao = 8;
+				raioMovimento = 4;
+				energia = 80;
+			} break;
+			case 'E': {
+				raioVisao = 10;
+				raioMovimento = 8;
+				energia = 200;
+			} break;
+			case 'S': {
+				raioVisao = 6;
+				raioMovimento = 8;
+				energia = 500;
+			} break;
+		}
 		motherLand = ninho;
 		ID_formiga = N_formiga;
 	//Incrementa ID para a próxima formiga a ser criada
