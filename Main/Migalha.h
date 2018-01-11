@@ -2,7 +2,7 @@
 #include "Elemento.h"
 #define crumbSymbol 'm'
 
-class Migalha : Elemento
+class Migalha : public Elemento
 {
 public:
 	Migalha(posXY pos, const int& energiaMigalha);

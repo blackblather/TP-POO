@@ -8,9 +8,9 @@ void Mapa::PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMiga
 	while (inseridas < qtdMigalhasIniciais) {
 		posAux.x = rand() % limite;
 		posAux.y = rand() % limite;
-		if (arrMapa[posAux.x][posAux.y] == ' ') {
+		if (arrMapa[posAux.y][posAux.x] == ' ') {
 			migalhas.push_back(*(new Migalha(posAux, percentDeMigalhasIniciais)));
-			arrMapa[posAux.x][posAux.y] = crumbSymbol;
+			arrMapa[posAux.y][posAux.x] = crumbSymbol;
 			inseridas++;
 		}
 	}
@@ -145,9 +145,25 @@ bool Mapa::Cria1Migalha(int x, int y) {
 	}
 	return false;
 }
-void Mapa::ActionMigalhas() {
+void Mapa::CriaNMigalhas() {
 	int qtd = rand() % maxMigalhasItr;
 	for (int i = 0; i < qtd; (Cria1Migalha(rand() % tamMapa, rand() % tamMapa) ? i++ : i = i));
+}
+void Mapa::DecayOldMigalhas() {
+	auto it = migalhas.begin();
+	while (it != migalhas.end()) {
+		it->energia--;
+		if ((it->energia / (double)energiaMigalhas) < 0.1) {
+			arrMapa[it->posElemento.y][it->posElemento.x] = ' ';
+			it = migalhas.erase(it);
+		}
+		else
+			it++;
+	}
+}
+void Mapa::ActionMigalhas() {
+	//CriaNMigalhas();
+	DecayOldMigalhas();
 }														//TODO
 //Construtor/Destrutor
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais, const int& maxMigalhasPorIteracao) {

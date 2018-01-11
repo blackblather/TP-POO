@@ -26,6 +26,8 @@ public:
 	void ActionNinhos();
 	void ActionFormigas();
 	bool Cria1Migalha(int x, int y);
+	void CriaNMigalhas();
+	void DecayOldMigalhas();
 	void ActionMigalhas();
 	Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais, const int& maxMigalhasPorIteracao);
 };
