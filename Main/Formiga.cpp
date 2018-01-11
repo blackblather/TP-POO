@@ -181,7 +181,9 @@ bool Formiga::RegraComeMigalha(char** arrMapa, vector<Migalha>* pMigalhas) {
 	return false; 
 }
 bool Formiga::RegraVaiParaNinho(char** arrMapa) { return false; }	//TODO
-bool Formiga::RegraPasseia(char** arrMapa) { return false; }
+bool Formiga::RegraPasseia(char** arrMapa) {
+	return false; 
+}
 //Prioridades das regras / Execução das regras
 void Formiga::ActionFormiga(char** arrMapa, vector<Ninho>* pNinhos, vector<Migalha>* pMigalhas) {
 	if (is_in_nest) {
