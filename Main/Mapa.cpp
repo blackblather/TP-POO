@@ -8,9 +8,9 @@ void Mapa::PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMiga
 	while (inseridas < qtdMigalhasIniciais) {
 		posAux.x = rand() % limite;
 		posAux.y = rand() % limite;
-		if (arrMapa[posAux.x][posAux.y] == ' ') {
+		if (arrMapa[posAux.y][posAux.x] == ' ') {
 			migalhas.push_back(*(new Migalha(posAux, percentDeMigalhasIniciais)));
-			arrMapa[posAux.x][posAux.y] = crumbSymbol;
+			arrMapa[posAux.y][posAux.x] = crumbSymbol;
 			inseridas++;
 		}
 	}
@@ -107,11 +107,10 @@ Ninho* Mapa::GetNinhoById(int id) {
 			return &(*it);
 	return nullptr;
 }
-void Mapa::CriaNinho(Ninho ninho) {
-	posXY posNinho = ninho.GetPosNinho();
+void Mapa::CriaNinho(posXY posNinho) {
 	if (PosEstaLivre(posNinho)) {
-		ninhos.push_back(ninho);
-		arrMapa[posNinho.y][posNinho.x] = ninho.simbolo;
+		ninhos.push_back(*(new Ninho(posNinho)));
+		arrMapa[posNinho.y][posNinho.x] = ninhos.back().simbolo;
 	}
 }
 void Mapa::ActionNinhos() {}														//TODO
@@ -134,13 +133,42 @@ void Mapa::ActionFormigas() {
 	/*Precorre os vectores "ninhos" e "formigas" sequencialmente*/
 	for (auto itN = ninhos.begin(); itN != ninhos.end(); itN++)
 		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++)
-			itF->ActionFormiga(arrMapa, &ninhos);
+			itF->ActionFormiga(arrMapa, tamMapa, &ninhos, &migalhas);
 }
 //Migalhas
-void Mapa::ActionMigalhas() {}														//TODO
+bool Mapa::Cria1Migalha(int x, int y) {
+	if (PosEstaLivre({x,y})) {
+		migalhas.push_back(*(new Migalha({x,y}, energiaMigalhas)));
+		arrMapa[y][x] = crumbSymbol;
+		return true;
+	}
+	return false;
+}
+void Mapa::CriaNMigalhas() {
+	int qtd = rand() % maxMigalhasItr;
+	for (int i = 0; i < qtd; (Cria1Migalha(rand() % tamMapa, rand() % tamMapa) ? i++ : i = i));
+}
+void Mapa::DecayOldMigalhas() {
+	auto it = migalhas.begin();
+	while (it != migalhas.end()) {
+		it->energia--;
+		if ((it->energia / (double)energiaMigalhas) < 0.1) {
+			arrMapa[it->posElemento.y][it->posElemento.x] = ' ';
+			it = migalhas.erase(it);
+		}
+		else
+			it++;
+	}
+}
+void Mapa::ActionMigalhas() {
+	DecayOldMigalhas();
+	CriaNMigalhas();
+}
 //Construtor/Destrutor
-Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
+Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais, const int& maxMigalhasPorIteracao) {
 	tamMapa = limiteMapa;
+	maxMigalhasItr = maxMigalhasPorIteracao;
+	energiaMigalhas = energiaNovasMigalhas;
 	int qtdMigalhasIniciais = (int)((tamMapa*tamMapa) * percentDeMigalhasIniciais / 100);
 	InicializaArrayMapa(tamMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais);
 }

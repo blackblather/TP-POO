@@ -4,19 +4,25 @@
 #include "Migalha.h"
 
 //Regras
-bool Formiga::RegraFoge(char** arrMapa, vector<Ninho>* pNinhos) {
+bool Formiga::RegraFoge(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
 	for (auto itN = (*pNinhos).begin(); itN != (*pNinhos).end(); itN++)
-		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++)
-			if (max(abs(posElemento.x - itF->posElemento.x), abs(posElemento.y - itF->posElemento.y)) <= raioVisao) {
+		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++) {
+			if (itF->motherLand != motherLand &&
+				max(abs(posElemento.x - itF->posElemento.x), abs(posElemento.y - itF->posElemento.y)) <= raioVisao) {
 				//encontrou enimigo no campo de visao
-				arrMapa[posElemento.x][posElemento.y] = ' ';
+				arrMapa[posElemento.y][posElemento.x] = ' ';
 				if (posElemento.x < itF->posElemento.x && posElemento.x > 0)
 					posElemento.x--;
+				else if (posElemento.x > itF->posElemento.x && posElemento.x < tamMapa - 1)
+					posElemento.x++;
 				if (posElemento.y < itF->posElemento.y && posElemento.y > 0)
 					posElemento.y--;
-				arrMapa[posElemento.x][posElemento.y] = simbolo;
+				else if (posElemento.y > itF->posElemento.y && posElemento.y < tamMapa - 1)
+					posElemento.y++;
+				arrMapa[posElemento.y][posElemento.x] = simbolo;
 				return true;
 			}
+		}
 	return false;
 }			//TODO
 bool Formiga::RegraPersegue(char** arrMapa, vector<Ninho>* pNinhos) {
@@ -49,7 +55,7 @@ bool Formiga::RegraPersegue(char** arrMapa, vector<Ninho>* pNinhos) {
 	}
 	return false;
 }
-bool Formiga::RegraAssalta(char** arrMapa) { return false; }		//TODO
+bool Formiga::RegraAssalta(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) { return false; }		//TODO
 bool Formiga::RegraProtege(char** arrMapa, vector<Ninho>* pNinhos) {
 	vector<Formiga> inimigos_percecionados;
 	vector<Formiga> aliados_percecionados;
@@ -183,18 +189,18 @@ bool Formiga::RegraComeMigalha(char** arrMapa, vector<Migalha>* pMigalhas) {
 bool Formiga::RegraVaiParaNinho(char** arrMapa) { return false; }	//TODO
 bool Formiga::RegraPasseia(char** arrMapa) { return false; }
 //Prioridades das regras / Execução das regras
-void Formiga::ActionFormiga(char** arrMapa, vector<Ninho>* pNinhos, vector<Migalha>* pMigalhas) {
+void Formiga::ActionFormiga(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos, vector<Migalha>* pMigalhas) {
 	if (is_in_nest) {
 		//Does whatever it is ants do in nests
 	}
 	else {
 		//Executa regras de acordo com o tipo de formiga até uma função retornar "true"
 		if (simbolo == 'C' || simbolo == 'c')
-			RegraFoge(arrMapa, pNinhos) || RegraComeMigalha(arrMapa, pMigalhas) || RegraProcuraMigalha(arrMapa) || RegraVaiParaNinho(arrMapa) || RegraPasseia(arrMapa);
+			RegraFoge(arrMapa, tamMapa, pNinhos) || RegraComeMigalha(arrMapa, pMigalhas) || RegraProcuraMigalha(arrMapa) || RegraVaiParaNinho(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'V' || simbolo == 'v')
 			RegraProtege(arrMapa, pNinhos) || RegraComeMigalha(arrMapa, pMigalhas) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'A' || simbolo == 'a')
-			RegraAssalta(arrMapa) || RegraPersegue(arrMapa, pNinhos) || RegraComeMigalha(arrMapa, pMigalhas) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
+		RegraAssalta(arrMapa, tamMapa, pNinhos) || RegraPersegue(arrMapa, pNinhos) || RegraComeMigalha(arrMapa, pMigalhas) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'E' || simbolo == 'e')
 			RegraComeMigalha(arrMapa, pMigalhas) || RegraPasseia(arrMapa);
 		//POR DEFINIR
@@ -208,7 +214,34 @@ Formiga::Formiga(posXY pos, char type, Ninho* ninho)
 {
 	//Inicializa vars
 		posElemento = pos;
-		simbolo = type;
+		simbolo = toupper(type);
+		switch (simbolo) {
+			case 'C': {
+				raioVisao = 5;
+				raioMovimento = 3;
+				energia = 100;
+			} break;
+			case 'V': {
+				raioVisao = 7;
+				raioMovimento = 5;
+				energia = 150;
+			} break;
+			case 'A': {
+				raioVisao = 8;
+				raioMovimento = 4;
+				energia = 80;
+			} break;
+			case 'E': {
+				raioVisao = 10;
+				raioMovimento = 8;
+				energia = 200;
+			} break;
+			case 'S': {
+				raioVisao = 6;
+				raioMovimento = 8;
+				energia = 500;
+			} break;
+		}
 		motherLand = ninho;
 		ID_formiga = N_formiga;
 	//Incrementa ID para a próxima formiga a ser criada

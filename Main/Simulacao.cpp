@@ -126,18 +126,15 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 	int valoraux = -1;
 	if (comandoPart.size() == 5 && comandoPart[0] == "cria1") 
 	{
-		bool isnum = is_number(comandoPart[2]);
-		bool isnumaux = is_number(comandoPart[3]);
-		bool isnumaux2 = is_number(comandoPart[4]);
-		if (isnum && isnumaux && isnumaux2) {
-			bool exists = this->mapa->Ninho_exists(comandoPart[2]);
+		if (is_number(comandoPart[2]) && is_number(comandoPart[3]) && is_number(comandoPart[4])) {
 			valor = stoi(comandoPart[3], nullptr, 10);
 			valoraux = stoi(comandoPart[4], nullptr, 10);
-			if (valor >= 0 && valor <= configsIniciais[limiteMapa] && valoraux >= 0 && valoraux <= configsIniciais[limiteMapa] && exists)
-			{
-				if (comandoPart[1] == "C" || comandoPart[1] == "V" || comandoPart[1] == "A" || comandoPart[1] == "E" || comandoPart[1] == "S" ||
-					comandoPart[1] == "c" || comandoPart[1] == "v" || comandoPart[1] == "a" || comandoPart[1] == "e" || comandoPart[1] == "s")
-					return true;
+			if (mapa->Ninho_exists(comandoPart[2]) &&
+				valor >= 0 && valor <= configsIniciais[limiteMapa] &&
+				valoraux >= 0 && valoraux <= configsIniciais[limiteMapa]) {
+					char tipoFormiga = toupper(comandoPart[1].at(0));
+					if (tipoFormiga == 'C' || tipoFormiga == 'V' || tipoFormiga == 'A' || tipoFormiga == 'E' || tipoFormiga == 'S')
+						return true;
 			}
 		}
 	}
@@ -151,8 +148,8 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 			if (exists && valor > 0 && valor < (configsIniciais[limiteMapa] * configsIniciais[limiteMapa]))
 				//VER ESTE IF COMO DEVE SER (TER EM CONTA AS POSICOES OCUPADAS)
 			{
-				if (comandoPart[2] == "C" || comandoPart[2] == "V" || comandoPart[2] == "A" || comandoPart[2] == "E" || comandoPart[2] == "S" ||
-					comandoPart[2] == "c" || comandoPart[2] == "v" || comandoPart[2] == "a" || comandoPart[2] == "e" || comandoPart[2] == "s")
+				char tipoFormiga = toupper(comandoPart[2].at(0));
+				if (tipoFormiga == 'C' || tipoFormiga == 'V' || tipoFormiga == 'A' || tipoFormiga == 'E' || tipoFormiga == 'S')
 					return true;
 			}
 		}
@@ -235,7 +232,6 @@ bool Simulacao::SimComandoEValido(const vector<string>& comandoPart) {
 
 void Simulacao::SetConfigInicial(vector<string> comandoPart) {
 	configsIniciais[PropNameToArrayIndex(comandoPart[0])] = stoi(comandoPart[1], nullptr, 10);
-
 }
 
 //Verifica se todas as configs iniciais estão definidas. Usado para verificar se pode começar a simulação.
@@ -253,7 +249,8 @@ bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 void Simulacao::InicializaMapa() {
 	mapa = new Mapa(configsIniciais[limiteMapa],
 		configsIniciais[energiaNovasMigalhas],
-		configsIniciais[percentDeMigalhasIniciais]);
+		configsIniciais[percentDeMigalhasIniciais],
+		configsIniciais[maxMigalhasPorIteracao]);
 }
 
 void Simulacao::PrintStatsAt(posXY posicaoInicial) {
@@ -281,27 +278,19 @@ void Simulacao::Tick(int qtd) {
 	for (int i = 0; i < qtd; i++) {
 		//mapa->ActionNinhos();
 		mapa->ActionFormigas();
-		//mapa->ActionMigalhas();
+		mapa->ActionMigalhas();
 	}
 }
 
 void Simulacao::ExecutaComando(vector<string> comandoPart) {
-	if (comandoPart[0] == "ninho") {
-		posXY pos{ stoi(comandoPart[1]) ,stoi(comandoPart[2]) };
-		Ninho ninhoTmp = Ninho(pos);
-		mapa->CriaNinho(ninhoTmp);
-	}
-	else if (comandoPart[0] == "criaf") {
+	if (comandoPart[0] == "ninho")
+		mapa->CriaNinho({ stoi(comandoPart[1]) ,stoi(comandoPart[2]) });
+	else if (comandoPart[0] == "criaf")
 		mapa->CriaF(stoi(comandoPart[1]), comandoPart[2].at(0), stoi(comandoPart[3]));
-	}
 	else if (comandoPart[0] == "cria1")
-	{
-
-	}
+		mapa->Cria1(comandoPart[1].at(0), stoi(comandoPart[2]), stoi(comandoPart[3]), stoi(comandoPart[4]));
 	else if (comandoPart[0] == "migalha")
-	{
-
-	}
+		mapa->Cria1Migalha(stoi(comandoPart[1]), stoi(comandoPart[2]));
 	else if (comandoPart[0] == "foca")
 	{
 

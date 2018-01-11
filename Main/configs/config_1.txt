@@ -1,7 +1,7 @@
-defmundo 10
+defmundo 15
 defen 1
 defpc 1
 defvt 1
 defmi 1
 defme 1
-defnm 1
+defnm 10
