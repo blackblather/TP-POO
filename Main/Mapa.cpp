@@ -128,13 +128,14 @@ bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
 	return false;
 }
 void Mapa::CriaF(int qtd, char tipo, int ID_ninho) {
+
 	for (int i = 0; i < qtd; (Cria1(tipo, ID_ninho, rand() % tamMapa, rand() % tamMapa) ? i++ : i=i));
 }
 void Mapa::ActionFormigas() {
 	/*Precorre os vectores "ninhos" e "formigas" sequencialmente*/
 	for (auto itN = ninhos.begin(); itN != ninhos.end(); itN++)
 		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++)
-			itF->ActionFormiga(arrMapa, &ninhos);
+			itF->ActionFormiga(arrMapa, tamMapa, &ninhos);
 }
 //Migalhas
 void Mapa::ActionMigalhas() {}														//TODO

@@ -3,19 +3,26 @@
 #include "Formiga.h"
 
 //Regras
-bool Formiga::RegraFoge(char** arrMapa, vector<Ninho>* pNinhos) {
+bool Formiga::RegraFoge(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
 	for (auto itN = (*pNinhos).begin(); itN != (*pNinhos).end(); itN++)
-		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++)
-			if (max(abs(posElemento.x - itF->posElemento.x), abs(posElemento.y - itF->posElemento.y)) <= raioVisao) {
+		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++) {
+			if (itF->ID_formiga != ID_formiga && itF->motherLand != motherLand) {
+				if (max(abs(posElemento.x - itF->posElemento.x), abs(posElemento.y - itF->posElemento.y)) <= raioVisao) {
 				//encontrou enimigo no campo de visao
-				arrMapa[posElemento.x][posElemento.y] = ' ';
-				if (posElemento.x < itF->posElemento.x && posElemento.x > 0)
-					posElemento.x--;
-				if (posElemento.y < itF->posElemento.y && posElemento.y > 0)
-					posElemento.y--;
-				arrMapa[posElemento.x][posElemento.y] = simbolo;
-				return true;
+					arrMapa[posElemento.y][posElemento.x] = ' ';
+					if (posElemento.x < itF->posElemento.x && posElemento.x > 0)
+						posElemento.x--;
+					else if (posElemento.x > itF->posElemento.x && posElemento.x < tamMapa - 1)
+						posElemento.x++;
+					if (posElemento.y < itF->posElemento.y && posElemento.y > 0)
+						posElemento.y--;
+					else if (posElemento.y > itF->posElemento.y && posElemento.y < tamMapa - 1)
+						posElemento.y++;
+					arrMapa[posElemento.y][posElemento.x] = simbolo;
+					return true;
+				}
 			}
+		}
 	return false;
 }			//TODO
 bool Formiga::RegraPersegue(char** arrMapa) { return false; }
@@ -26,14 +33,14 @@ bool Formiga::RegraComeMigalha(char** arrMapa) { return false; }
 bool Formiga::RegraVaiParaNinho(char** arrMapa) { return false; }	//TODO
 bool Formiga::RegraPasseia(char** arrMapa) { return false; }
 //Prioridades das regras / Execução das regras
-void Formiga::ActionFormiga(char** arrMapa, vector<Ninho>* pNinhos) {
+void Formiga::ActionFormiga(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
 	if (is_in_nest) {
 		//Does whatever it is ants do in nests
 	}
 	else {
 		//Executa regras de acordo com o tipo de formiga até uma função retornar "true"
 		if (simbolo == 'C' || simbolo == 'c')
-			RegraFoge(arrMapa, pNinhos) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraVaiParaNinho(arrMapa) || RegraPasseia(arrMapa);
+			RegraFoge(arrMapa, tamMapa, pNinhos) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraVaiParaNinho(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'V' || simbolo == 'v')
 			RegraProtege(arrMapa) || RegraComeMigalha(arrMapa) || RegraProcuraMigalha(arrMapa) || RegraPasseia(arrMapa);
 		else if (simbolo == 'A' || simbolo == 'a')

@@ -8,7 +8,7 @@ class Formiga : public Elemento
 	int ID_formiga, raioVisao = 3;
 	bool is_in_nest;
 	Ninho* motherLand;
-	bool RegraFoge(char** arrMapa, vector<Ninho>* pNinhos);
+	bool RegraFoge(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos);
 	bool RegraPersegue(char** arrMapa);
 	bool RegraAssalta(char** arrMapa);
 	bool RegraProtege(char** arrMapa);
@@ -17,7 +17,7 @@ class Formiga : public Elemento
 	bool RegraVaiParaNinho(char** arrMapa);
 	bool RegraPasseia(char** arrMapa);
 public:
-	void ActionFormiga(char** arrMapa, vector<Ninho>* pNinhos);
+	void ActionFormiga(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos);
 	posXY GetPosFormiga() const;
 	void GetAntInfo() const;
 	Formiga(posXY pos, char type, Ninho* ninho);
