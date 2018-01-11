@@ -15,4 +15,3 @@ public:
 	void NinhoInfoDetailed() const;
 	void NinhoInfoSimple() const;
 };
-

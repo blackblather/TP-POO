@@ -3,7 +3,6 @@
 #include "Ninho.h"
 #include "Migalha.h"
 
-
 class Mapa : Ecra
 {
 	char** arrMapa;
@@ -12,7 +11,6 @@ class Mapa : Ecra
 	vector<Ninho> ninhos;
 	void PreencheMapaInicial(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
 	void PreencheMapaComMigalhasIniciais(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
-	//void PreencheMapaComFormigas();
 	void InicializaArrayMapa(const int& limite, const int& qtdMigalhasIniciais, const int& percentDeMigalhasIniciais);
 public:
 	void DrawMap(const int& limite);

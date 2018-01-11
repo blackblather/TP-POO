@@ -296,21 +296,20 @@ void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	}
 	else if (comandoPart[0] == "cria1")
 	{
-		
+
 	}
 	else if (comandoPart[0] == "migalha")
 	{
-		
+
 	}
 	else if (comandoPart[0] == "foca")
 	{
-		
+
 	}
-	else if (comandoPart[0] == "tempo")
-	{
-		if (comandoPart.size() == 2) {}
-		else {}
-	}
+	else if (comandoPart.size() == 1 && comandoPart[0] == "tempo")
+		Tick(1);
+	else if (comandoPart.size() == 2 && comandoPart[0] == "tempo")
+		Tick(stoi(comandoPart[1]));
 	else if (comandoPart[0] == "energninho")
 	{
 		

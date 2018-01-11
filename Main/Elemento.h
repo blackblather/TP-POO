@@ -1,10 +1,9 @@
 #pragma once
 class Elemento
 {
-protected:
+public:
 	posXY posElemento;
 	int energia;
-public:
 	char simbolo;
 };
 
