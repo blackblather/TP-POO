@@ -290,9 +290,7 @@ void Simulacao::ExecutaComando(vector<string> comandoPart) {
 	else if (comandoPart[0] == "cria1")
 		mapa->Cria1(comandoPart[1].at(0), stoi(comandoPart[2]), stoi(comandoPart[3]), stoi(comandoPart[4]));
 	else if (comandoPart[0] == "migalha")
-	{
-
-	}
+		mapa->Cria1Migalha(stoi(comandoPart[1]), stoi(comandoPart[2]));
 	else if (comandoPart[0] == "foca")
 	{
 

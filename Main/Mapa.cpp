@@ -127,7 +127,6 @@ bool Mapa::Cria1(char tipo, int ID_ninho, int posX, int posY) {
 	return false;
 }
 void Mapa::CriaF(int qtd, char tipo, int ID_ninho) {
-
 	for (int i = 0; i < qtd; (Cria1(tipo, ID_ninho, rand() % tamMapa, rand() % tamMapa) ? i++ : i=i));
 }
 void Mapa::ActionFormigas() {
@@ -162,9 +161,9 @@ void Mapa::DecayOldMigalhas() {
 	}
 }
 void Mapa::ActionMigalhas() {
-	CriaNMigalhas();
 	DecayOldMigalhas();
-}														//TODO
+	CriaNMigalhas();
+}
 //Construtor/Destrutor
 Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais, const int& maxMigalhasPorIteracao) {
 	tamMapa = limiteMapa;
