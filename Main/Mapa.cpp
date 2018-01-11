@@ -107,11 +107,10 @@ Ninho* Mapa::GetNinhoById(int id) {
 			return &(*it);
 	return nullptr;
 }
-void Mapa::CriaNinho(Ninho ninho) {
-	posXY posNinho = ninho.GetPosNinho();
+void Mapa::CriaNinho(posXY posNinho) {
 	if (PosEstaLivre(posNinho)) {
-		ninhos.push_back(ninho);
-		arrMapa[posNinho.y][posNinho.x] = ninho.simbolo;
+		ninhos.push_back(*(new Ninho(posNinho)));
+		arrMapa[posNinho.y][posNinho.x] = ninhos.back().simbolo;
 	}
 }
 void Mapa::ActionNinhos() {}														//TODO

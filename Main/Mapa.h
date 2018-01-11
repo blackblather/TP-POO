@@ -20,7 +20,7 @@ public:
 	void ListaNinho(int ID_ninho) const;
 	void ListaPosicao(posXY xy, int limiteMapa) const;
 	bool PosEstaLivre(posXY pos);
-	void CriaNinho(Ninho ninho);
+	void CriaNinho(posXY posNinho);
 	bool Cria1(char tipo, int ID_ninho, int posX, int posY);
 	void CriaF(int qtd, char tipo, int ID_ninho);
 	void ActionNinhos();

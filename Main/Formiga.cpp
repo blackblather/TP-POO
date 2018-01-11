@@ -6,27 +6,27 @@
 bool Formiga::RegraFoge(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
 	for (auto itN = (*pNinhos).begin(); itN != (*pNinhos).end(); itN++)
 		for (auto itF = itN->formigas.begin(); itF != itN->formigas.end(); itF++) {
-			if (itF->ID_formiga != ID_formiga && itF->motherLand != motherLand) {
-				if (max(abs(posElemento.x - itF->posElemento.x), abs(posElemento.y - itF->posElemento.y)) <= raioVisao) {
+			if (itF->motherLand != motherLand &&
+				max(abs(posElemento.x - itF->posElemento.x), abs(posElemento.y - itF->posElemento.y)) <= raioVisao) {
 				//encontrou enimigo no campo de visao
-					arrMapa[posElemento.y][posElemento.x] = ' ';
-					if (posElemento.x < itF->posElemento.x && posElemento.x > 0)
-						posElemento.x--;
-					else if (posElemento.x > itF->posElemento.x && posElemento.x < tamMapa - 1)
-						posElemento.x++;
-					if (posElemento.y < itF->posElemento.y && posElemento.y > 0)
-						posElemento.y--;
-					else if (posElemento.y > itF->posElemento.y && posElemento.y < tamMapa - 1)
-						posElemento.y++;
-					arrMapa[posElemento.y][posElemento.x] = simbolo;
-					return true;
-				}
+				arrMapa[posElemento.y][posElemento.x] = ' ';
+				if (posElemento.x < itF->posElemento.x && posElemento.x > 0)
+					posElemento.x--;
+				else if (posElemento.x > itF->posElemento.x && posElemento.x < tamMapa - 1)
+					posElemento.x++;
+				if (posElemento.y < itF->posElemento.y && posElemento.y > 0)
+					posElemento.y--;
+				else if (posElemento.y > itF->posElemento.y && posElemento.y < tamMapa - 1)
+					posElemento.y++;
+				arrMapa[posElemento.y][posElemento.x] = simbolo;
+				return true;
 			}
 		}
 	return false;
 }			//Should be done
 bool Formiga::RegraPersegue(char** arrMapa) { return false; }
 bool Formiga::RegraAssalta(char** arrMapa, int tamMapa, vector<Ninho>* pNinhos) {
+
 	return false;
 }		//TODO
 bool Formiga::RegraProtege(char** arrMapa) { return false; }
