@@ -249,7 +249,8 @@ bool Simulacao::TodasAsConfigIniciasEstaoDefinidas() {
 void Simulacao::InicializaMapa() {
 	mapa = new Mapa(configsIniciais[limiteMapa],
 		configsIniciais[energiaNovasMigalhas],
-		configsIniciais[percentDeMigalhasIniciais]);
+		configsIniciais[percentDeMigalhasIniciais],
+		configsIniciais[maxMigalhasPorIteracao]);
 }
 
 void Simulacao::PrintStatsAt(posXY posicaoInicial) {
@@ -276,8 +277,8 @@ void Simulacao::PrintSimulacaoNoEstadoAtual() {
 void Simulacao::Tick(int qtd) {
 	for (int i = 0; i < qtd; i++) {
 		//mapa->ActionNinhos();
-		mapa->ActionFormigas();
-		//mapa->ActionMigalhas();
+		//mapa->ActionFormigas();
+		mapa->ActionMigalhas();
 	}
 }
 

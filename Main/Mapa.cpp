@@ -137,10 +137,23 @@ void Mapa::ActionFormigas() {
 			itF->ActionFormiga(arrMapa, tamMapa, &ninhos);
 }
 //Migalhas
-void Mapa::ActionMigalhas() {}														//TODO
+bool Mapa::Cria1Migalha(int x, int y) {
+	if (PosEstaLivre({x,y})) {
+		migalhas.push_back(*(new Migalha({x,y}, energiaMigalhas)));
+		arrMapa[y][x] = crumbSymbol;
+		return true;
+	}
+	return false;
+}
+void Mapa::ActionMigalhas() {
+	int qtd = rand() % maxMigalhasItr;
+	for (int i = 0; i < qtd; (Cria1Migalha(rand() % tamMapa, rand() % tamMapa) ? i++ : i = i));
+}														//TODO
 //Construtor/Destrutor
-Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais) {
+Mapa::Mapa(const int& limiteMapa, const int& energiaNovasMigalhas, const int& percentDeMigalhasIniciais, const int& maxMigalhasPorIteracao) {
 	tamMapa = limiteMapa;
+	maxMigalhasItr = maxMigalhasPorIteracao;
+	energiaMigalhas = energiaNovasMigalhas;
 	int qtdMigalhasIniciais = (int)((tamMapa*tamMapa) * percentDeMigalhasIniciais / 100);
 	InicializaArrayMapa(tamMapa, qtdMigalhasIniciais, percentDeMigalhasIniciais);
 }
