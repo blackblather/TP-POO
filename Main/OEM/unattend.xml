@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<OEMInformation>
+				<Model>i15-TC</Model>
+				<Logo>%WINDIR%\OEM\Logo.bmp</Logo>
+				<SupportHours>7X24</SupportHours>
+				<SupportPhone></SupportPhone>
+				<SupportURL>www.51cube.com</SupportURL>
+				<Manufacturer>cube</Manufacturer>
+			</OEMInformation>
+		<ProductKey>37GNV-YCQVD-38XP9-T848R-FC2HD</ProductKey>
+		<SignInMode>1</SignInMode>
+        </component> 
+        <component name="Microsoft-Windows-CoreMmRes" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<CameraSoundLevel>50</CameraSoundLevel>
+        </component>		
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>1</Order>
+                    <Path>cmd.exe /c C:\Recovery\OEM\DualOStimezone.cmd</Path>
+                    <Description>DualOS timezone</Description>
+                </RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+                    <Order>2</Order>
+                    <Path>cmd.exe /c pnputil -i -a C:\Recovery\OEM\GoodixTouchDriver.inf</Path>
+                    <Description>DualOS timezone</Description>
+                </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>3</Order>
+                    <Path>cmd.exe /c xcopy /e /y C:\Recovery\OEM\SwitchNOW.lnk C:\Users\Public\Desktop\</Path>
+                    <Description>Copy txt</Description>
+					<WillReboot>Always</WillReboot>
+                </RunSynchronousCommand>
+            </RunSynchronous>
+        </component>		
+	    <component name="Security-Malware-Windows-Defender" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <TrustedImageIdentifier>{f80487a6-9417-4644-8273-808cced821a9}</TrustedImageIdentifier>
+		</component>
+    </settings>
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <Order>1</Order>
+                    <CommandLine>cmd.exe /c C:\Recovery\OEM\DisableAutoAutoRotationLock.cmd</CommandLine>
+                    <Description>DisableAutoAutoRotationLock</Description>
+                </SynchronousCommand>		
+                <SynchronousCommand wcm:action="add">
+                    <Order>2</Order>
+                    <CommandLine>cmd.exe /c C:\Recovery\OEM\Icon.cmd</CommandLine>
+                    <Description>DisableAutoAutoRotationLock</Description>
+                </SynchronousCommand>	
+                <SynchronousCommand wcm:action="add">
+                    <Order>3</Order>
+                    <CommandLine>cmd.exe /c REG ADD "HKCU\Software\Microsoft\Internet Explorer\Main" /v "Start Page" /t REG_SZ /d www.51cube.com /f</CommandLine>
+                    <Description>ChangeIEwebsite</Description>
+                </SynchronousCommand>				
+            </FirstLogonCommands>
+        </component>
+    </settings>
+</unattend>
